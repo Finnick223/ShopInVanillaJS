@@ -21,7 +21,7 @@ export const renderProducts = (productList, products, addProductToCart) => {
         productContainer.appendChild(quantityInput)
 
         const productPrice = document.createElement('p');
-        productPrice.textContent = product.price + '$';
+        productPrice.textContent = product.price * product.quantity + '$';
         productContainer.appendChild(productPrice);
 
         const buttonAdd = document.createElement('button');
@@ -32,6 +32,7 @@ export const renderProducts = (productList, products, addProductToCart) => {
 
         quantityInput.addEventListener('input', function (e) {
             product.quantity = Number(e.target.value);
+            productPrice.textContent = product.price * product.quantity + '$';
         })
 
         buttonAdd.addEventListener('click', () =>

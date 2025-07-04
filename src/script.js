@@ -5,8 +5,10 @@ import { renderCart } from './renderCart.js';
 
 const init = () => {
     const { productList, cart } = getElementsFromDOM();
+    //wykminic sposob na pozbycie sie let, byc moze obiekt state z getterami i setterami
     let products = [];
     let cartData = [];
+    const selectedItems = new Set();
 
     const addProductToCart = (product) => {
         const existingItem = cartData.find((item) => item.name === product.name);
@@ -14,20 +16,20 @@ const init = () => {
         if (!existingItem) cartData.push({ ...product });
         else existingItem.quantity += product.quantity;
 
-        renderCart(cart, cartData, deleteItemFromCart, handleCartQuantityChange);
+        renderCart(cart, cartData, selectedItems, deleteItemFromCart, handleCartQuantityChange);
     }
 
     const deleteItemFromCart = (id) => {
         const newCartData = cartData.filter((item) => item.id !== id)
         cartData = newCartData;
-        renderCart(cart, cartData, deleteItemFromCart, handleCartQuantityChange)
+        renderCart(cart, cartData, selectedItems, deleteItemFromCart, handleCartQuantityChange)
     }
 
     const handleCartQuantityChange = (id, quantity) => {
         if (quantity >= 1 && quantity <= 99) {
             const cartTarget = cartData.find((item) => item.id === id)
             cartTarget.quantity = quantity;
-            renderCart(cart, cartData, deleteItemFromCart, handleCartQuantityChange)
+            renderCart(cart, cartData, selectedItems, deleteItemFromCart, handleCartQuantityChange)
         }
     };
 

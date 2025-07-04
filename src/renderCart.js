@@ -1,4 +1,6 @@
-export const renderCart = (cart, cartData, deleteItemFromCart, handleCartQuantityChange) => {
+import { CalculateSum } from "./totalPrice.js";
+
+export const renderCart = (cart, cartData, selectedItems, deleteItemFromCart, handleCartQuantityChange) => {
     cart.replaceChildren();
 
     // creating map from cart data to group products in cart by manufacturer
@@ -18,14 +20,16 @@ export const renderCart = (cart, cartData, deleteItemFromCart, handleCartQuantit
         manufacturerWrapper.classList.add('cart-manufacturer-container');
         cart.appendChild(manufacturerWrapper);
 
-        const checkbox = document.createElement('input');
-        checkbox.type = "checkbox";
-        checkbox.id = manufacturer.manufacturer;
-        manufacturerWrapper.appendChild(checkbox);
+        const manufacturerCheckbox = document.createElement('input');
+        manufacturerCheckbox.type = "checkbox";
+        manufacturerCheckbox.id = manufacturer.manufacturer;
+        const allItemsSelected = manufacturer.items.every(item => selectedItems.has(item.id));
+        manufacturerCheckbox.checked = allItemsSelected;
+        manufacturerWrapper.appendChild(manufacturerCheckbox);
 
         const label = document.createElement('label');
         label.setAttribute('for', manufacturer.manufacturer);
-        label.appendChild(checkbox);
+        label.appendChild(manufacturerCheckbox);
         label.appendChild(document.createTextNode(manufacturer.manufacturer));
         manufacturerWrapper.appendChild(label);
 
@@ -38,6 +42,7 @@ export const renderCart = (cart, cartData, deleteItemFromCart, handleCartQuantit
             const checkbox = document.createElement('input');
             checkbox.type = "checkbox";
             checkbox.id = item.id;
+            checkbox.checked = selectedItems.has(item.id);
             product.appendChild(checkbox);
 
 
@@ -68,6 +73,16 @@ export const renderCart = (cart, cartData, deleteItemFromCart, handleCartQuantit
             buttonDelete.classList.add('btn-del');
             product.appendChild(buttonDelete);
 
+
+            checkbox.addEventListener('change', (e) => {
+                if (e.target.checked) {
+                    selectedItems.add(item.id);
+                } else {
+                    selectedItems.delete(item.id);
+                }
+                CalculateSum(cart, cartData, selectedItems)
+            });
+
             quantityInput.addEventListener('input', function (e) {
                 const inputId = e.target.id;
                 const inputQuantity = Number(e.target.value);
@@ -83,5 +98,24 @@ export const renderCart = (cart, cartData, deleteItemFromCart, handleCartQuantit
         const totalManufacturerPrice = document.createElement('p');
         totalManufacturerPrice.textContent = 'Total: ' + sum + '$';
         manufacturerWrapper.appendChild(totalManufacturerPrice);
+
+        manufacturerCheckbox.addEventListener('change', (e) => {
+            if (e.target.checked) {
+                cartData.forEach(product => {
+                    if (product.manufacturer === e.target.id) {
+                        selectedItems.add(product.id);
+                    }
+                });
+            } else {
+                cartData.forEach(product => {
+                    if (product.manufacturer === e.target.id) {
+                        selectedItems.delete(product.id);
+                    }
+                });
+            }
+            renderCart(cart, cartData, selectedItems, deleteItemFromCart, handleCartQuantityChange);
+            CalculateSum(cart, cartData, selectedItems)
+        });
     }
+    CalculateSum(cart, cartData, selectedItems);
 }
