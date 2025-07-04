@@ -29,6 +29,11 @@ export const renderProducts = (productList, products, addProductToCart) => {
         buttonAdd.classList.add('btn-add');
         productContainer.appendChild(buttonAdd);
 
+
+        quantityInput.addEventListener('input', function (e) {
+            product.quantity = Number(e.target.value);
+        })
+
         buttonAdd.addEventListener('click', () =>
             addProductToCart(product)
         );

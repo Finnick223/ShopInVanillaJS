@@ -58,9 +58,19 @@ body {
 
 }
 
+.cart-manufacturer-container {
+    border: 1px dotted black;
+    margin: 10px;
+    padding: 5px;
+}
+
 .cart-item-container {
     border: 1px dotted black;
     margin: 10px;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+
 }
 
 input[type=number]::-webkit-inner-spin-button {

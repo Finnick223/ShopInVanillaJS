@@ -1,4 +1,4 @@
-export const renderCart = (cart, cartData, deleteItemFromCart) => {
+export const renderCart = (cart, cartData, deleteItemFromCart, handleCartQuantityChange) => {
     cart.replaceChildren();
 
     // creating map from cart data to group products in cart by manufacturer
@@ -15,22 +15,29 @@ export const renderCart = (cart, cartData, deleteItemFromCart) => {
 
     for (const manufacturer of groupedProducts) {
         const manufacturerWrapper = document.createElement('div');
-        manufacturerWrapper.classList.add('cart-item-container');
+        manufacturerWrapper.classList.add('cart-manufacturer-container');
         cart.appendChild(manufacturerWrapper);
 
-        const manufacturerName = document.createElement('p');
-        manufacturerName.textContent = manufacturer.manufacturer;
-        manufacturerWrapper.appendChild(manufacturerName);
+        const checkbox = document.createElement('input');
+        checkbox.type = "checkbox";
+        checkbox.id = manufacturer.manufacturer;
+        manufacturerWrapper.appendChild(checkbox);
+
+        const label = document.createElement('label');
+        label.setAttribute('for', manufacturer.manufacturer);
+        label.appendChild(checkbox);
+        label.appendChild(document.createTextNode(manufacturer.manufacturer));
+        manufacturerWrapper.appendChild(label);
+
 
         for (const item of manufacturer.items) {
-            console.log(item)
             const product = document.createElement("div");
             product.classList.add('cart-item-container');
             manufacturerWrapper.appendChild(product);
 
             const checkbox = document.createElement('input');
             checkbox.type = "checkbox";
-            checkbox.id = item.key;
+            checkbox.id = item.id;
             product.appendChild(checkbox);
 
 
@@ -53,6 +60,7 @@ export const renderCart = (cart, cartData, deleteItemFromCart) => {
             quantityInput.setAttribute("min", 1);
             quantityInput.setAttribute("max", 99);
             quantityInput.setAttribute("inputmode", "numeric")
+            quantityInput.setAttribute("id", item.id)
             product.appendChild(quantityInput)
 
             const buttonDelete = document.createElement('button');
@@ -60,9 +68,20 @@ export const renderCart = (cart, cartData, deleteItemFromCart) => {
             buttonDelete.classList.add('btn-del');
             product.appendChild(buttonDelete);
 
+            quantityInput.addEventListener('input', function (e) {
+                const inputId = e.target.id;
+                const inputQuantity = Number(e.target.value);
+                handleCartQuantityChange(inputId, inputQuantity)
+            })
+
             buttonDelete.addEventListener('click', () =>
-                deleteItemFromCart(item.key)
+                deleteItemFromCart(item.id)
             );
         }
+
+        const sum = manufacturer.items.reduce((sum, item) => sum + (item.quantity * item.price), 0)
+        const totalManufacturerPrice = document.createElement('p');
+        totalManufacturerPrice.textContent = 'Total: ' + sum + '$';
+        manufacturerWrapper.appendChild(totalManufacturerPrice);
     }
 }

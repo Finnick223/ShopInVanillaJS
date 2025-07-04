@@ -1,55 +1,55 @@
 [
     {
-        "key": 1,
+        "id": "1",
         "name": "produkt 1",
         "manufacturer": "manufacturer",
         "quantity": 1,
         "price": 21.37
     },
     {
-        "key": 2,
+        "id": "2",
         "name": "produkt 2",
         "manufacturer": "manufacturer",
         "quantity": 2,
         "price": 11.11
     },
     {
-        "key": 3,
+        "id": "3",
         "name": "produkt 3",
         "manufacturer": "manufacturer",
         "quantity": 1,
         "price": 11.11
     },
     {
-        "key": 4,
+        "id": "4",
         "name": "produkt 4",
         "manufacturer": "manufacturer2",
         "quantity": 1,
         "price": 11.11
     },
     {
-        "key": 5,
+        "id": "5",
         "name": "produkt 5",
         "manufacturer": "manufacturer2",
         "quantity": 1,
         "price": 21.37
     },
     {
-        "key": 6,
+        "id": "6",
         "name": "produkt 6",
         "manufacturer": "manufacturer3",
         "quantity": 2,
         "price": 11.11
     },
     {
-        "key": 7,
+        "id": "7",
         "name": "produkt 7",
         "manufacturer": "manufacturer3",
         "quantity": 1,
         "price": 11.11
     },
     {
-        "key": 8,
+        "id": "8",
         "name": "produkt 8",
         "manufacturer": "manufacturer3",
         "quantity": 1,

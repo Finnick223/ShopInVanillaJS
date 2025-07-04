@@ -9,19 +9,27 @@ const init = () => {
     let cartData = [];
 
     const addProductToCart = (product) => {
-        const searchInCart = cartData.find((item) => item.name === product.name);
+        const existingItem = cartData.find((item) => item.name === product.name);
 
-        if (!searchInCart) cartData.push({ ...product });
-        else searchInCart.quantity += product.quantity;
+        if (!existingItem) cartData.push({ ...product });
+        else existingItem.quantity += product.quantity;
 
-        renderCart(cart, cartData, deleteItemFromCart);
+        renderCart(cart, cartData, deleteItemFromCart, handleCartQuantityChange);
     }
 
-    const deleteItemFromCart = (key) => {
-        const newCartData = cartData.filter((item) => item.key !== key)
-        cartData = [...newCartData];
-        renderCart(cart, cartData, deleteItemFromCart)
+    const deleteItemFromCart = (id) => {
+        const newCartData = cartData.filter((item) => item.id !== id)
+        cartData = newCartData;
+        renderCart(cart, cartData, deleteItemFromCart, handleCartQuantityChange)
     }
+
+    const handleCartQuantityChange = (id, quantity) => {
+        if (quantity >= 1 && quantity <= 99) {
+            const cartTarget = cartData.find((item) => item.id === id)
+            cartTarget.quantity = quantity;
+            renderCart(cart, cartData, deleteItemFromCart, handleCartQuantityChange)
+        }
+    };
 
     fetch('../products.json')
         .then(response => response.json())
@@ -33,8 +41,7 @@ const init = () => {
             console.error('Error fetching the data:', error);
         });
 
-
-    renderCart(cart, cartData, deleteItemFromCart);
+    // renderCart(cart, cartData, deleteItemFromCart);     jesli obsluga localstorage to render przy inicie
 }
 
 init()
