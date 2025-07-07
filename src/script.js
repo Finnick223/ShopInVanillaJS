@@ -5,8 +5,8 @@ import { renderCart } from './components/renderCart.js';
 
 const init = () => {
     const { productList, cart } = getElementsFromDOM();
+    const products = [];
     //wykminic sposob na pozbycie sie let, byc moze obiekt state z getterami i setterami
-    let products = [];
     let cartData = [];
     const selectedItems = new Set();
 
@@ -33,16 +33,16 @@ const init = () => {
         }
     };
 
-    fetch('../products.json')
-        .then(response => response.json())
-        .then(data => {
-            products = data;
+    (async () => {
+        try {
+            const response = await fetch('../products.json');
+            const data = await response.json();
+            products.push(...data);
             renderProducts(productList, products, addProductToCart);
-        })
-        .catch(error => {
+        } catch (error) {
             console.error('Error fetching the data:', error);
-        });
-
+        }
+    })();
     // renderCart(cart, cartData, deleteItemFromCart);     jesli obsluga localstorage to render przy inicie
 }
 

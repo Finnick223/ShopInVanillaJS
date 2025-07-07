@@ -12,8 +12,11 @@ export const renderProducts = (productList, products, addProductToCart) => {
         productName.textContent = product.name;
         productContainer.appendChild(productName);
 
-        const productManufacturer = createParagraph(product.manufacturer);
+        const productManufacturer = createParagraph({ textContent: product.manufacturer });
         productContainer.appendChild(productManufacturer);
+
+        const productPrice = createParagraph({ textContent: product.price * product.quantity + '$' });
+        productContainer.appendChild(productPrice);
 
         const quantityInput = createInput({
             type: 'number',
@@ -29,14 +32,19 @@ export const renderProducts = (productList, products, addProductToCart) => {
         })
         productContainer.appendChild(quantityInput)
 
-        const productPrice = createParagraph(product.price * product.quantity + '$');
-        productContainer.appendChild(productPrice);
 
         const buttonAdd = createButton({
-            textContent: 'add to cart',
+            textContent: '',
             className: 'btn-add',
             onClick: () => addProductToCart(product)
         });
+
+        const img = document.createElement('img');
+        img.src = 'assets/cart.svg';
+        img.alt = 'Add to cart';
+        img.style.height = '12px';
+        buttonAdd.appendChild(img);
+
         productContainer.appendChild(buttonAdd);
     }
 }

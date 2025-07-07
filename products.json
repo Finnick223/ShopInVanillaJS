@@ -54,5 +54,54 @@
         "manufacturer": "manufacturer3",
         "quantity": 1,
         "price": 11.11
+    },
+    {
+        "id": "9",
+        "name": "produkt 9",
+        "manufacturer": "manufacturer2",
+        "quantity": 1,
+        "price": 21.37
+    },
+    {
+        "id": "10",
+        "name": "produkt 10",
+        "manufacturer": "manufacturer3",
+        "quantity": 2,
+        "price": 11.11
+    },
+    {
+        "id": "11",
+        "name": "produkt 11",
+        "manufacturer": "manufacturer3",
+        "quantity": 1,
+        "price": 11.11
+    },
+    {
+        "id": "12",
+        "name": "produkt 12",
+        "manufacturer": "manufacturer3",
+        "quantity": 1,
+        "price": 11.11
+    },
+    {
+        "id": "14",
+        "name": "produkt 14",
+        "manufacturer": "manufacturer3",
+        "quantity": 1,
+        "price": 11.11
+    },
+    {
+        "id": "15",
+        "name": "produkt 15",
+        "manufacturer": "manufacturer3",
+        "quantity": 1,
+        "price": 11.11
+    },
+    {
+        "id": "16",
+        "name": "produkt 16",
+        "manufacturer": "manufacturer3",
+        "quantity": 1,
+        "price": 11.11
     }
 ]

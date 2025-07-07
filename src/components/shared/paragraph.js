@@ -1,4 +1,4 @@
-export const createParagraph = (textContent, id, className) => {
+export const createParagraph = ({ textContent, id, className }) => {
     const paragraph = document.createElement("p");
     paragraph.textContent = textContent;
     if (id) paragraph.id = id;

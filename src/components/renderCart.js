@@ -34,13 +34,14 @@ export const renderCart = (cart, cartData, selectedItems, deleteItemFromCart, ha
                     });
                 }
                 renderCart(cart, cartData, selectedItems, deleteItemFromCart, handleCartQuantityChange);
-                CalculateSum(cart, cartData, selectedItems)
+                CalculateSum(cartData, selectedItems)
             },
         })
         manufacturerWrapper.appendChild(manufacturerCheckbox);
 
         const label = document.createElement('label');
         label.setAttribute('for', manufacturer.manufacturer);
+        label.classList.add('manufacturer-label')
         label.appendChild(manufacturerCheckbox);
         label.appendChild(document.createTextNode(manufacturer.manufacturer));
         manufacturerWrapper.appendChild(label);
@@ -63,19 +64,19 @@ export const renderCart = (cart, cartData, selectedItems, deleteItemFromCart, ha
                     }
 
                     manufacturerCheckbox.checked = manufacturer.items.every(item => selectedItems.has(item.id));
-                    CalculateSum(cart, cartData, selectedItems)
+                    CalculateSum(cartData, selectedItems)
                 }
             });
             product.appendChild(checkbox);
 
 
-            const productName = createParagraph(item.name);
+            const productName = createParagraph({ textContent: item.name });
             product.appendChild(productName);
 
-            const productManufacturer = createParagraph(item.manufacturer);
+            const productManufacturer = createParagraph({ textContent: item.manufacturer });
             product.appendChild(productManufacturer);
 
-            const productPrice = createParagraph(item.price + '$');
+            const productPrice = createParagraph({ textContent: item.price + '$' });
             product.appendChild(productPrice);
 
             const quantityInput = createInput({
@@ -96,30 +97,43 @@ export const renderCart = (cart, cartData, selectedItems, deleteItemFromCart, ha
 
 
             const buttonDelete = createButton({
-                textContent: 'X',
+                textContent: '',
                 className: 'btn-del',
                 onClick: () => deleteItemFromCart(item.id)
             });
             product.appendChild(buttonDelete);
+            const img = document.createElement('img');
+            img.src = 'assets/trash.svg';
+            img.alt = 'Delete';
+            img.style.height = '12px';
+            buttonDelete.appendChild(img);
         }
 
         const sum = manufacturer.items.reduce((sum, item) => sum + (item.quantity * item.price), 0)
-        const totalManufacturerPrice = createParagraph('Total: ' + sum + '$');
+        const totalManufacturerPrice = createParagraph({
+            textContent: 'Total: ' + sum + '$',
+            className: 'manufacturer-sum-text'
+        });
         manufacturerWrapper.appendChild(totalManufacturerPrice);
     }
 
-    CalculateSum(cart, cartData, selectedItems);
-
-    const buyButton = createButton(
-        {
-            textContent: 'BUY',
-            type: 'submit',
-            onClick: () => {
-                // tu powinna byc logika wysylania zapytania post do api po uprzedniej walidacji danych z koszyka
-                const selectedProductDetails = cartData.filter(item => selectedItems.has(item.id));
-                console.log("przedmioty zaznaczone do kupienia:", selectedProductDetails);
-            }
+    const totalElement = createParagraph({ textContent: '', id: 'cart-total', className: 'cart-total' });
+    const buyButton = createButton({
+        textContent: 'BUY',
+        type: 'submit',
+        onClick: () => {
+            const selectedProductDetails = cartData.filter(item => selectedItems.has(item.id));
+            console.log("przedmioty zaznaczone do kupienia:", selectedProductDetails);
         }
-    );
-    cart.appendChild(buyButton);
+    });
+
+    const footerWrapper = document.createElement('div');
+    footerWrapper.classList.add('cart-footer');
+    footerWrapper.appendChild(totalElement);
+    footerWrapper.appendChild(buyButton);
+
+    cart.appendChild(footerWrapper);
+
+    CalculateSum(cartData, selectedItems);
+
 }
