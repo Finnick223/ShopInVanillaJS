@@ -1,3 +1,5 @@
+import { createParagraph } from "../components/shared/paragraph.js";
+
 export const CalculateSum = (cart, cartData, selectedItems) => {
     let total = 0;
     for (const item of cartData) {
@@ -7,8 +9,7 @@ export const CalculateSum = (cart, cartData, selectedItems) => {
     }
     let totalElement = document.querySelector('#cart-total');
     if (!totalElement) {
-        totalElement = document.createElement('p');
-        totalElement.id = 'cart-total';
+        totalElement = createParagraph(`Grand Total: ${total}$`, 'cart-total');
         cart.appendChild(totalElement);
     }
     totalElement.textContent = `Grand Total: ${total}$`;

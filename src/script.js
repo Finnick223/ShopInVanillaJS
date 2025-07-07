@@ -1,7 +1,7 @@
 "use strict";
-import { getElementsFromDOM } from './getElementsFromDOM.js'
-import { renderProducts } from './renderProducts.js'
-import { renderCart } from './renderCart.js';
+import { getElementsFromDOM } from './utils/getElementsFromDOM.js'
+import { renderProducts } from './components/renderProducts.js'
+import { renderCart } from './components/renderCart.js';
 
 const init = () => {
     const { productList, cart } = getElementsFromDOM();
