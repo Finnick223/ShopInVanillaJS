@@ -108,15 +108,26 @@ body {
 
 .product-bottom {
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: space-between;
     margin-top: 10px;
-    padding: 5%;
     border-top: 1px solid black;
+    height: 60px;
+}
+
+.product-bottom p {
+    display: flex;
+    align-items: center;
+    padding-left: 3%;
+}
+
+.product-buttons {
+    display: flex;
+    margin-left: auto;
 }
 
 .btn-add {
-    padding: 4px;
+    padding: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -142,10 +153,11 @@ body {
 .cart-item-container {
     border: 1px solid black;
     margin: 10px;
-    padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 2%;
+    height: 40px;
 }
 
 .manufacturer-sum-text {
@@ -192,18 +204,15 @@ input[type=number]::-webkit-inner-spin-button {
 
 input[type=number] {
     width: 40px;
-    height: 30px;
-    border: 1px solid #ccc;
+    height: 100%;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
     text-align: center;
+    background-color: transparent;
 
 }
 
 @media only screen and (max-width: 750px) {
-    body {
-        /* for coding purposes */
-        background-color: rgba(173, 216, 230, 0.2);
-    }
-
     #content {
         display: inline-flex;
         flex-direction: column;

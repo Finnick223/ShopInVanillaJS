@@ -34,8 +34,11 @@ export const renderProducts = (productList, products, addProductToCart) => {
         const bottomSection = document.createElement('div');
         bottomSection.classList.add('product-bottom');
 
-        const productPrice = createParagraph({ textContent: (product.price * product.quantity).toFixed(2) + '$' });
+        const productPrice = createParagraph({ textContent: product.price + ' $' });
         bottomSection.appendChild(productPrice);
+
+        const buttons = document.createElement('div');
+        buttons.classList.add('product-buttons')
 
         const quantityInput = createInput({
             type: 'number',
@@ -45,12 +48,9 @@ export const renderProducts = (productList, products, addProductToCart) => {
             inputMode: 'numeric',
             onInput: (event) => {
                 if (Number(event.target.value) <= 99) product.quantity = Number(event.target.value);
-                productPrice.textContent = (product.price * product.quantity).toFixed(2) + '$';
             }
 
         })
-        bottomSection.appendChild(quantityInput)
-
 
         const buttonAdd = createButton({
             textContent: '',
@@ -64,12 +64,10 @@ export const renderProducts = (productList, products, addProductToCart) => {
         img.style.height = '20px';
         buttonAdd.appendChild(img);
 
-        bottomSection.appendChild(buttonAdd);
+        buttons.appendChild(quantityInput);
+        buttons.appendChild(buttonAdd);
+        bottomSection.appendChild(buttons);
         productContainer.appendChild(bottomSection);
 
     }
 }
-
-
-
-

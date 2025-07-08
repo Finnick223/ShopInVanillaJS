@@ -64,6 +64,7 @@ export const renderCart = (cart, cartData, selectedItems, deleteItemFromCart, ha
                     }
 
                     manufacturerCheckbox.checked = manufacturer.items.every(item => selectedItems.has(item.id));
+                    renderCart(cart, cartData, selectedItems, deleteItemFromCart, handleCartQuantityChange);
                     CalculateSum(cartData, selectedItems)
                 }
             });
@@ -76,7 +77,7 @@ export const renderCart = (cart, cartData, selectedItems, deleteItemFromCart, ha
             const productManufacturer = createParagraph({ textContent: item.manufacturer });
             product.appendChild(productManufacturer);
 
-            const productPrice = createParagraph({ textContent: item.price.toFixed(2) + '$' });
+            const productPrice = createParagraph({ textContent: (item.price * item.quantity).toFixed(2) + ' $' });
             product.appendChild(productPrice);
 
             const quantityInput = createInput({
@@ -105,11 +106,16 @@ export const renderCart = (cart, cartData, selectedItems, deleteItemFromCart, ha
             const img = document.createElement('img');
             img.src = 'assets/trash.svg';
             img.alt = 'Delete';
-            img.style.height = '20px';
+            img.style.height = '30px';
+            img.style.cursor = 'pointer';
             buttonDelete.appendChild(img);
         }
 
-        const sum = manufacturer.items.reduce((sum, item) => sum + (item.quantity * item.price), 0).toFixed(2);
+        const sum = manufacturer.items
+            .filter(item => selectedItems.has(item.id))
+            .reduce((sum, item) => sum + (item.quantity * item.price), 0)
+            .toFixed(2);
+
         const totalManufacturerPrice = createParagraph({
             textContent: 'Total: ' + sum + '$',
             className: 'manufacturer-sum-text'
