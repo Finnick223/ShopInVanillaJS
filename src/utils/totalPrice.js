@@ -7,5 +7,5 @@ export const CalculateSum = (cartData, selectedItems) => {
         }
     }
     let totalElement = document.querySelector('#cart-total');
-    totalElement.textContent = `Grand Total: ${total}$`;
+    totalElement.textContent = `Grand Total: ${total.toFixed(2)}$`;
 }

@@ -34,7 +34,7 @@ export const renderProducts = (productList, products, addProductToCart) => {
         const bottomSection = document.createElement('div');
         bottomSection.classList.add('product-bottom');
 
-        const productPrice = createParagraph({ textContent: product.price * product.quantity + '$' });
+        const productPrice = createParagraph({ textContent: (product.price * product.quantity).toFixed(2) + '$' });
         bottomSection.appendChild(productPrice);
 
         const quantityInput = createInput({
@@ -43,9 +43,9 @@ export const renderProducts = (productList, products, addProductToCart) => {
             min: 1,
             max: 99,
             inputMode: 'numeric',
-            onInput: (e) => {
-                product.quantity = Number(e.target.value);
-                productPrice.textContent = product.price * product.quantity + '$';
+            onInput: (event) => {
+                if (Number(event.target.value) <= 99) product.quantity = Number(event.target.value);
+                productPrice.textContent = (product.price * product.quantity).toFixed(2) + '$';
             }
 
         })

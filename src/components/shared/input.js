@@ -17,6 +17,12 @@ export const createInput = ({ type, id, value, checked, min, max, inputMode, onI
         if (typeof onInput === 'function') {
             input.addEventListener('input', onInput);
         }
+        input.addEventListener('input', (event) => {
+            input.value = input.value.replace(/[^\d]/g, '');
+            if (typeof onInput === 'function') {
+                onInput(event);
+            }
+        });
     }
 
     return input;

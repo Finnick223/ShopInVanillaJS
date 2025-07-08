@@ -16,33 +16,52 @@ body {
     padding: 1rem;
 }
 
-#header {
+#content {
+    display: inline-flex;
+    gap: 10px;
+}
+
+.shop {
+    width: 70vw;
+    height: 90vh;
+}
+
+.cart {
+    width: 30vw;
+    height: 90vh;
+}
+
+.shop-header {
     width: 100%;
     height: 5vh;
     background-color: rgba(85, 107, 47, 0.201);
     border: 1px solid black;
-    padding: 1em;
-}
-
-.header-content {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    align-items: center;
+    gap: 10px;
+    padding-left: 2%;
 }
 
-#content {
+.cart-header {
     width: 100%;
-    height: 90vh;
-    display: inline-flex;
+    height: 5vh;
+    background-color: rgba(85, 107, 47, 0.201);
+    border: 1px solid black;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    justify-content: flex-end;
+    padding-right: 2%;
 }
 
 .product-list {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     justify-items: center;
-    padding: 3vh 0;
+    padding: 3vh 1vw;
     background-color: rgba(255, 228, 196, 0.05);
-    width: 70vw;
+    width: 100%;
+    height: 100%;
     border: 1px solid black;
     overflow: auto;
     gap: 1rem;
@@ -104,11 +123,12 @@ body {
     cursor: pointer;
 }
 
-.cart {
-    width: 30vw;
+.cart-content {
+    width: 100%;
     border: 1px solid black;
     overflow: auto;
     font-size: large;
+    height: 100%;
 
 
 }
@@ -178,18 +198,7 @@ input[type=number] {
 
 }
 
-@media only screen and (min-width: 768px) and (max-width: 1150px) {
-    .product-list {
-        width: 60%;
-    }
-
-    .cart {
-        width: 40%;
-    }
-}
-
-
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 750px) {
     body {
         /* for coding purposes */
         background-color: rgba(173, 216, 230, 0.2);
@@ -204,6 +213,7 @@ input[type=number] {
 
     .product-list {
         width: 100%;
+        height: 95%;
     }
 
     .product-bottom {
@@ -218,6 +228,35 @@ input[type=number] {
 
     .cart {
         width: 100%;
-        height: fit-content;
+    }
+
+    .shop {
+        width: 100%;
+    }
+
+    .shop-header {
+        width: 100%;
+        height: 5vh;
+        background-color: rgba(85, 107, 47, 0.201);
+        border: 1px solid black;
+    }
+
+    .cart-header {
+        width: 100%;
+        height: 5vh;
+        background-color: rgba(85, 107, 47, 0.201);
+        border: 1px solid black;
+        justify-content: flex-start;
+    }
+}
+
+@media only screen and (min-width: 750px) and (max-width: 1150px) {
+
+    .shop {
+        width: 60vw;
+    }
+
+    .cart {
+        width: 40vw;
     }
 }

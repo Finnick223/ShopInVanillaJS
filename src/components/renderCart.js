@@ -19,16 +19,16 @@ export const renderCart = (cart, cartData, selectedItems, deleteItemFromCart, ha
             type: 'checkbox',
             id: manufacturer.manufacturer,
             checked: allItemsSelected,
-            onChange: (e) => {
-                if (e.target.checked) {
+            onChange: (event) => {
+                if (event.target.checked) {
                     cartData.forEach(product => {
-                        if (product.manufacturer === e.target.id) {
+                        if (product.manufacturer === event.target.id) {
                             selectedItems.add(product.id);
                         }
                     });
                 } else {
                     cartData.forEach(product => {
-                        if (product.manufacturer === e.target.id) {
+                        if (product.manufacturer === event.target.id) {
                             selectedItems.delete(product.id);
                         }
                     });
@@ -56,8 +56,8 @@ export const renderCart = (cart, cartData, selectedItems, deleteItemFromCart, ha
                 type: 'checkbox',
                 id: item.id,
                 checked: selectedItems.has(item.id),
-                onChange: (e) => {
-                    if (e.target.checked) {
+                onChange: (event) => {
+                    if (event.target.checked) {
                         selectedItems.add(item.id);
                     } else {
                         selectedItems.delete(item.id);
@@ -76,7 +76,7 @@ export const renderCart = (cart, cartData, selectedItems, deleteItemFromCart, ha
             const productManufacturer = createParagraph({ textContent: item.manufacturer });
             product.appendChild(productManufacturer);
 
-            const productPrice = createParagraph({ textContent: item.price + '$' });
+            const productPrice = createParagraph({ textContent: item.price.toFixed(2) + '$' });
             product.appendChild(productPrice);
 
             const quantityInput = createInput({
@@ -86,9 +86,9 @@ export const renderCart = (cart, cartData, selectedItems, deleteItemFromCart, ha
                 min: 1,
                 max: 99,
                 inputMode: 'numeric',
-                onInput: (e) => {
-                    const inputId = e.target.id;
-                    const inputQuantity = Number(e.target.value);
+                onInput: (event) => {
+                    const inputId = event.target.id;
+                    const inputQuantity = Number(event.target.value);
                     handleCartQuantityChange(inputId, inputQuantity)
                 }
 
@@ -109,7 +109,7 @@ export const renderCart = (cart, cartData, selectedItems, deleteItemFromCart, ha
             buttonDelete.appendChild(img);
         }
 
-        const sum = manufacturer.items.reduce((sum, item) => sum + (item.quantity * item.price), 0)
+        const sum = manufacturer.items.reduce((sum, item) => sum + (item.quantity * item.price), 0).toFixed(2);
         const totalManufacturerPrice = createParagraph({
             textContent: 'Total: ' + sum + '$',
             className: 'manufacturer-sum-text'

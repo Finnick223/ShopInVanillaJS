@@ -9,26 +9,23 @@
 </head>
 
 <body>
-    <header id="header">
-        <div class="header-content">
-            <div>
+    <main id="content">
+        <section class="shop">
+            <header class="shop-header">
                 <img src="/assets/shop.svg" alt="Logo" height="15px" />
                 THE SHOP
-            </div>
-            <div>
+            </header>
+            <div class="product-list"></div>
+        </section>
+        <section class="cart">
+            <header class="cart-header">
                 <img src="/assets/cart.svg" alt="Logo" height="15px" />
                 THE CART
-            </div>
-        </div>
-    </header>
-    <main id="content">
-        <section class="product-list"></section>
-        <section class="cart"></section>
+            </header>
+            <div class="cart-content"></div>
+        </section>
     </main>
 </body>
 <script type="module" src="src/script.js"></script>
 
 </html>
-
-<!-- wczytywanie danych z koszyka do localstorage  -->
-<!-- input number pozwala na przecinki -->

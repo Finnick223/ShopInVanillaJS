@@ -2,26 +2,33 @@
 import { getElementsFromDOM } from './utils/getElementsFromDOM.js'
 import { renderProducts } from './components/renderProducts.js'
 import { renderCart } from './components/renderCart.js';
+import { getCartFromLocalStorage, updateLocalStorage } from './utils/handleLocalStorage.js';
 
 const init = () => {
     const { productList, cart } = getElementsFromDOM();
     const products = [];
-    //wykminic sposob na pozbycie sie let, byc moze obiekt state z getterami i setterami
-    let cartData = [];
+    const cartData = getCartFromLocalStorage();
     const selectedItems = new Set();
 
     const addProductToCart = (product) => {
         const existingItem = cartData.find((item) => item.name === product.name);
 
         if (!existingItem) cartData.push({ ...product });
-        else existingItem.quantity += product.quantity;
+        else {
+            const newQuantity = existingItem.quantity + (product.quantity ?? 1);
+            existingItem.quantity = newQuantity > 99 ? 99 : newQuantity;
+        }
 
+        updateLocalStorage(cartData);
         renderCart(cart, cartData, selectedItems, deleteItemFromCart, handleCartQuantityChange);
     }
 
     const deleteItemFromCart = (id) => {
-        const newCartData = cartData.filter((item) => item.id !== id)
-        cartData = newCartData;
+        const indexOfDeletedItem = cartData.findIndex((item) => item.id === id);
+        if (indexOfDeletedItem !== -1) {
+            cartData.splice(indexOfDeletedItem, 1);
+        }
+        updateLocalStorage(cartData);
         renderCart(cart, cartData, selectedItems, deleteItemFromCart, handleCartQuantityChange)
     }
 
@@ -29,6 +36,7 @@ const init = () => {
         if (quantity >= 1 && quantity <= 99) {
             const cartTarget = cartData.find((item) => item.id === id)
             cartTarget.quantity = quantity;
+            updateLocalStorage(cartData);
             renderCart(cart, cartData, selectedItems, deleteItemFromCart, handleCartQuantityChange)
         }
     };
@@ -43,8 +51,7 @@ const init = () => {
             console.error('Error fetching the data:', error);
         }
     })();
-    // renderCart(cart, cartData, deleteItemFromCart);     jesli obsluga localstorage to render przy inicie
+    renderCart(cart, cartData, selectedItems, deleteItemFromCart, handleCartQuantityChange);   //localstorage przy starcie
 }
-
 init()
 
