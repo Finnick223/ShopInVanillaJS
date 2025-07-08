@@ -105,7 +105,7 @@ export const renderCart = (cart, cartData, selectedItems, deleteItemFromCart, ha
             const img = document.createElement('img');
             img.src = 'assets/trash.svg';
             img.alt = 'Delete';
-            img.style.height = '12px';
+            img.style.height = '20px';
             buttonDelete.appendChild(img);
         }
 

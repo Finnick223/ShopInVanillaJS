@@ -8,15 +8,34 @@ export const renderProducts = (productList, products, addProductToCart) => {
         productContainer.classList.add('product-container');
         productList.appendChild(productContainer);
 
+        const topSection = document.createElement('div');
+        topSection.classList.add('product-top');
+
+        const imgPlaceholder = document.createElement('div');
+        imgPlaceholder.classList.add('product-image');
+        topSection.appendChild(imgPlaceholder);
+
+        const productInfo = document.createElement('div');
+        productInfo.classList.add('product-info');
+
         const productName = document.createElement('h3');
         productName.textContent = product.name;
-        productContainer.appendChild(productName);
+        productInfo.appendChild(productName);
 
         const productManufacturer = createParagraph({ textContent: product.manufacturer });
-        productContainer.appendChild(productManufacturer);
+        productInfo.appendChild(productManufacturer);
+
+        const description = createParagraph({ textContent: 'Short description' });
+        productInfo.appendChild(description);
+
+        topSection.appendChild(productInfo);
+        productContainer.appendChild(topSection);
+
+        const bottomSection = document.createElement('div');
+        bottomSection.classList.add('product-bottom');
 
         const productPrice = createParagraph({ textContent: product.price * product.quantity + '$' });
-        productContainer.appendChild(productPrice);
+        bottomSection.appendChild(productPrice);
 
         const quantityInput = createInput({
             type: 'number',
@@ -30,7 +49,7 @@ export const renderProducts = (productList, products, addProductToCart) => {
             }
 
         })
-        productContainer.appendChild(quantityInput)
+        bottomSection.appendChild(quantityInput)
 
 
         const buttonAdd = createButton({
@@ -42,10 +61,12 @@ export const renderProducts = (productList, products, addProductToCart) => {
         const img = document.createElement('img');
         img.src = 'assets/cart.svg';
         img.alt = 'Add to cart';
-        img.style.height = '12px';
+        img.style.height = '20px';
         buttonAdd.appendChild(img);
 
-        productContainer.appendChild(buttonAdd);
+        bottomSection.appendChild(buttonAdd);
+        productContainer.appendChild(bottomSection);
+
     }
 }
 
