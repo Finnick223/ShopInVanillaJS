@@ -212,6 +212,40 @@ input[type=number] {
 
 }
 
+.quantity {
+    display: flex;
+    align-items: center;
+    border-left: 1px solid rgb(197, 175, 175);
+}
+
+.quantity-buttons {
+    display: flex;
+    flex-direction: column;
+}
+
+.quantity input[type=number]::-webkit-inner-spin-button,
+.quantity input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+
+.quantity input,
+.quantity button {
+    width: 40px;
+    text-align: center;
+    font-weight: 700;
+    border: 1px solid rgb(197, 175, 175);
+}
+
+.quantity input {
+    border: none;
+    font-size: large;
+    background-color: rgba(252, 251, 250, 0.5);
+}
+
+.product-buttons .quantity button {
+    padding: 0.45em;
+}
+
 @media only screen and (max-width: 750px) {
     #content {
         display: inline-flex;
