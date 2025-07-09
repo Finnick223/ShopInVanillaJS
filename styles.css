@@ -54,25 +54,49 @@ body {
     padding-right: 2%;
 }
 
+#search-products {
+    width: 100%;
+    padding: 8px 12px;
+    margin: 5px 0;
+    font-size: 1rem;
+    border: 1px solid black;
+    background-color: rgba(252, 251, 250, 0.5);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-style: italic;
+}
+
+#search-products::placeholder {
+    color: #777;
+    font-style: italic;
+}
+
+.product-list-wrapper {
+    overflow: auto;
+    border: 1px solid black;
+    background-color: rgba(255, 228, 196, 0.05);
+    height: 94%;
+}
+
 .product-list {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     justify-items: center;
     padding: 3vh 1vw;
-    background-color: rgba(255, 228, 196, 0.05);
     width: 100%;
-    height: 100%;
-    border: 1px solid black;
+    height: fit-content;
     overflow: auto;
     gap: 1rem;
 }
 
 .product-container {
     width: 95%;
-    height: fit-content;
     border: 1px solid black;
     background-color: rgba(222, 184, 135, 0.1);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-height: 200px;
 }
 
 .product-top {
@@ -254,9 +278,8 @@ input[type=number] {
         width: 100%;
     }
 
-    .product-list {
-        width: 100%;
-        height: 95%;
+    .product-list-wrapper {
+        height: 88%;
     }
 
     .product-bottom {
@@ -265,7 +288,6 @@ input[type=number] {
     }
 
     .product-container {
-        height: fit-content;
         margin: 5%;
     }
 

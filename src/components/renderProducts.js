@@ -3,12 +3,12 @@ import { createButton } from "./shared/button.js";
 import { createInput } from "./shared/input.js";
 import { createParagraph } from "./shared/paragraph.js";
 
-export const renderProducts = () => {
-    const { products, elements: { productList } } = CartContext;
+export const renderProducts = (productsToRender = CartContext.products) => {
+    const { productList } = CartContext.elements;
 
     productList.replaceChildren();
 
-    for (const product of products) {
+    for (const product of productsToRender) {
         const productContainer = document.createElement("div");
         productContainer.classList.add('product-container');
         productList.appendChild(productContainer);

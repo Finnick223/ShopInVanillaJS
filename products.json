@@ -1,107 +1,352 @@
 [
     {
         "id": "1",
-        "name": "produkt 1",
-        "manufacturer": "manufacturer",
+        "name": "Wireless Mouse",
+        "manufacturer": "LogiTech",
         "quantity": 1,
-        "price": 21.37
+        "price": 24.99
     },
     {
         "id": "2",
-        "name": "produkt 2",
-        "manufacturer": "manufacturer",
-        "quantity": 2,
-        "price": 11.11
+        "name": "Mechanical Keyboard",
+        "manufacturer": "Corsair",
+        "quantity": 1,
+        "price": 89.99
     },
     {
         "id": "3",
-        "name": "produkt 3",
-        "manufacturer": "manufacturer",
+        "name": "USB-C Charger",
+        "manufacturer": "Anker",
         "quantity": 1,
-        "price": 11.11
+        "price": 19.99
     },
     {
         "id": "4",
-        "name": "produkt 4",
-        "manufacturer": "manufacturer2",
+        "name": "Bluetooth Speaker",
+        "manufacturer": "JBL",
         "quantity": 1,
-        "price": 11.11
+        "price": 49.95
     },
     {
         "id": "5",
-        "name": "produkt 5",
-        "manufacturer": "manufacturer2",
+        "name": "Noise Cancelling Headphones",
+        "manufacturer": "Sony",
         "quantity": 1,
-        "price": 21.37
+        "price": 199.99
     },
     {
         "id": "6",
-        "name": "produkt 6",
-        "manufacturer": "manufacturer3",
-        "quantity": 2,
-        "price": 11.11
+        "name": "Smartphone Stand",
+        "manufacturer": "Anker",
+        "quantity": 1,
+        "price": 12.99
     },
     {
         "id": "7",
-        "name": "produkt 7",
-        "manufacturer": "manufacturer3",
+        "name": "Gaming Monitor",
+        "manufacturer": "ASUS",
         "quantity": 1,
-        "price": 11.11
+        "price": 279.00
     },
     {
         "id": "8",
-        "name": "produkt 8",
-        "manufacturer": "manufacturer3",
+        "name": "External SSD 1TB",
+        "manufacturer": "Samsung",
         "quantity": 1,
-        "price": 11.11
+        "price": 109.99
     },
     {
         "id": "9",
-        "name": "produkt 9",
-        "manufacturer": "manufacturer2",
+        "name": "Laptop Backpack",
+        "manufacturer": "Samsonite",
         "quantity": 1,
-        "price": 21.37
+        "price": 59.99
     },
     {
         "id": "10",
-        "name": "produkt 10",
-        "manufacturer": "manufacturer3",
-        "quantity": 2,
-        "price": 11.11
+        "name": "Wireless Earbuds",
+        "manufacturer": "Sony",
+        "quantity": 1,
+        "price": 129.99
     },
     {
         "id": "11",
-        "name": "produkt 11",
-        "manufacturer": "manufacturer3",
+        "name": "Smart LED Bulb",
+        "manufacturer": "Philips",
         "quantity": 1,
-        "price": 11.11
+        "price": 14.99
     },
     {
         "id": "12",
-        "name": "produkt 12",
-        "manufacturer": "manufacturer3",
+        "name": "Portable Power Bank",
+        "manufacturer": "Anker",
         "quantity": 1,
-        "price": 11.11
+        "price": 39.99
+    },
+    {
+        "id": "13",
+        "name": "Fitness Tracker",
+        "manufacturer": "Fitbit",
+        "quantity": 1,
+        "price": 99.95
     },
     {
         "id": "14",
-        "name": "produkt 14",
-        "manufacturer": "manufacturer3",
+        "name": "4K Streaming Stick",
+        "manufacturer": "Roku",
         "quantity": 1,
-        "price": 11.11
+        "price": 49.99
     },
     {
         "id": "15",
-        "name": "produkt 15",
-        "manufacturer": "manufacturer3",
+        "name": "Smart Thermostat",
+        "manufacturer": "Nest",
         "quantity": 1,
-        "price": 11.11
+        "price": 129.00
     },
     {
         "id": "16",
-        "name": "produkt 16",
-        "manufacturer": "manufacturer3",
+        "name": "Webcam 1080p",
+        "manufacturer": "LogiTech",
         "quantity": 1,
-        "price": 11.11
+        "price": 59.99
+    },
+    {
+        "id": "17",
+        "name": "Ergonomic Chair",
+        "manufacturer": "Herman Miller",
+        "quantity": 1,
+        "price": 899.00
+    },
+    {
+        "id": "18",
+        "name": "Desk Lamp",
+        "manufacturer": "Philips",
+        "quantity": 1,
+        "price": 29.99
+    },
+    {
+        "id": "19",
+        "name": "Smart Plug",
+        "manufacturer": "TP-Link",
+        "quantity": 1,
+        "price": 24.99
+    },
+    {
+        "id": "20",
+        "name": "Wi-Fi Router",
+        "manufacturer": "TP-Link",
+        "quantity": 1,
+        "price": 79.99
+    },
+    {
+        "id": "21",
+        "name": "Laptop Stand",
+        "manufacturer": "Rain Design",
+        "quantity": 1,
+        "price": 42.00
+    },
+    {
+        "id": "22",
+        "name": "Drawing Tablet",
+        "manufacturer": "Wacom",
+        "quantity": 1,
+        "price": 199.99
+    },
+    {
+        "id": "23",
+        "name": "Smartwatch",
+        "manufacturer": "Fitbit",
+        "quantity": 1,
+        "price": 149.95
+    },
+    {
+        "id": "24",
+        "name": "Wireless Charger",
+        "manufacturer": "Anker",
+        "quantity": 1,
+        "price": 25.99
+    },
+    {
+        "id": "25",
+        "name": "Gaming Mousepad",
+        "manufacturer": "Corsair",
+        "quantity": 1,
+        "price": 19.99
+    },
+    {
+        "id": "26",
+        "name": "Noise-Isolating Earphones",
+        "manufacturer": "Sony",
+        "quantity": 1,
+        "price": 59.99
+    },
+    {
+        "id": "27",
+        "name": "Smart Doorbell",
+        "manufacturer": "Ring",
+        "quantity": 1,
+        "price": 99.99
+    },
+    {
+        "id": "28",
+        "name": "Bluetooth Tracker",
+        "manufacturer": "Tile",
+        "quantity": 1,
+        "price": 29.99
+    },
+    {
+        "id": "29",
+        "name": "USB Hub",
+        "manufacturer": "Anker",
+        "quantity": 1,
+        "price": 22.99
+    },
+    {
+        "id": "30",
+        "name": "Portable Projector",
+        "manufacturer": "Anker",
+        "quantity": 1,
+        "price": 249.99
+    },
+    {
+        "id": "31",
+        "name": "Smart Lock",
+        "manufacturer": "August",
+        "quantity": 1,
+        "price": 199.00
+    },
+    {
+        "id": "32",
+        "name": "Mechanical Pencil Set",
+        "manufacturer": "Pentel",
+        "quantity": 1,
+        "price": 9.99
+    },
+    {
+        "id": "33",
+        "name": "Wireless Gaming Controller",
+        "manufacturer": "Sony",
+        "quantity": 1,
+        "price": 69.99
+    },
+    {
+        "id": "34",
+        "name": "Laptop Cooling Pad",
+        "manufacturer": "Cooler Master",
+        "quantity": 1,
+        "price": 34.99
+    },
+    {
+        "id": "35",
+        "name": "Smart Scale",
+        "manufacturer": "Withings",
+        "quantity": 1,
+        "price": 59.95
+    },
+    {
+        "id": "36",
+        "name": "USB Flash Drive 128GB",
+        "manufacturer": "SanDisk",
+        "quantity": 1,
+        "price": 17.99
+    },
+    {
+        "id": "37",
+        "name": "Noise-Canceling Mic",
+        "manufacturer": "Blue",
+        "quantity": 1,
+        "price": 119.99
+    },
+    {
+        "id": "38",
+        "name": "Smartphone Gimbal",
+        "manufacturer": "DJI",
+        "quantity": 1,
+        "price": 139.00
+    },
+    {
+        "id": "39",
+        "name": "LED Strip Lights",
+        "manufacturer": "Govee",
+        "quantity": 1,
+        "price": 27.99
+    },
+    {
+        "id": "40",
+        "name": "Smart Coffee Maker",
+        "manufacturer": "Keurig",
+        "quantity": 1,
+        "price": 149.99
+    },
+    {
+        "id": "41",
+        "name": "Wireless Presenter",
+        "manufacturer": "LogiTech",
+        "quantity": 1,
+        "price": 39.99
+    },
+    {
+        "id": "42",
+        "name": "Smart Alarm Clock",
+        "manufacturer": "Lenovo",
+        "quantity": 1,
+        "price": 59.99
+    },
+    {
+        "id": "43",
+        "name": "Digital Drawing Pen",
+        "manufacturer": "Wacom",
+        "quantity": 1,
+        "price": 29.99
+    },
+    {
+        "id": "44",
+        "name": "Laptop Sleeve",
+        "manufacturer": "Samsonite",
+        "quantity": 1,
+        "price": 24.99
+    },
+    {
+        "id": "45",
+        "name": "Bluetooth Headset",
+        "manufacturer": "Jabra",
+        "quantity": 1,
+        "price": 89.99
+    },
+    {
+        "id": "46",
+        "name": "Smart Light Panel",
+        "manufacturer": "Nanoleaf",
+        "quantity": 1,
+        "price": 199.99
+    },
+    {
+        "id": "47",
+        "name": "Wireless Keyboard",
+        "manufacturer": "LogiTech",
+        "quantity": 1,
+        "price": 49.99
+    },
+    {
+        "id": "48",
+        "name": "USB Desk Fan",
+        "manufacturer": "Honeywell",
+        "quantity": 1,
+        "price": 14.99
+    },
+    {
+        "id": "49",
+        "name": "Smartphone Tripod",
+        "manufacturer": "Joby",
+        "quantity": 1,
+        "price": 39.95
+    },
+    {
+        "id": "50",
+        "name": "Portable Bluetooth Radio",
+        "manufacturer": "JBL",
+        "quantity": 1,
+        "price": 59.95
     }
 ]

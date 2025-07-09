@@ -6,7 +6,7 @@ import { renderCart } from './components/renderCart.js';
 import { getCartFromLocalStorage, updateLocalStorage } from './utils/handleLocalStorage.js';
 
 const init = () => {
-    const { productList, cart } = getElementsFromDOM();
+    const { productList, cart, searchInput } = getElementsFromDOM();
     CartContext.elements.productList = productList;
     CartContext.elements.cart = cart;
     CartContext.cartData = getCartFromLocalStorage();
@@ -44,6 +44,14 @@ const init = () => {
 
     CartContext.actions = { addProductToCart, deleteItemFromCart, handleCartQuantityChange };
     renderCart();
+
+    searchInput.addEventListener("input", (event) => {
+        const searchTerm = event.target.value.toLowerCase();
+        const filteredProducts = CartContext.products.filter(product =>
+            product.name.toLowerCase().includes(searchTerm)
+        );
+        renderProducts(filteredProducts);
+    });
 
     (async () => {
         const response = await fetch('../products.json');
