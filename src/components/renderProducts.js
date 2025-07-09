@@ -5,8 +5,11 @@ import { createParagraph } from "./shared/paragraph.js";
 
 export const renderProducts = (productsToRender = CartContext.products) => {
     const { productList } = CartContext.elements;
-
     productList.replaceChildren();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const manufacturerFilter = urlParams.get('manufacturer');
+    productsToRender = manufacturerFilter ? productsToRender.filter(item => item.manufacturer === manufacturerFilter) : productsToRender;
 
     for (const product of productsToRender) {
         const productContainer = document.createElement("div");
