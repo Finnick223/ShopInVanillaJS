@@ -1,8 +1,13 @@
+import { CartContext } from '../context/CartContext.js';
 import { createButton } from "./shared/button.js";
 import { createInput } from "./shared/input.js";
 import { createParagraph } from "./shared/paragraph.js";
+import { CalculateSum } from "../utils/CalculateSum.js";
+import { renderCart } from './renderCart.js';
 
-export const createCartItem = ({ item, selectedItems, manufacturer, cartData, manufacturerCheckbox, deleteItemFromCart, handleCartQuantityChange, renderCart, cart, CalculateSum }) => {
+export const createCartItem = ({ item, manufacturer, manufacturerCheckbox }) => {
+    const { selectedItems } = CartContext;
+
     const product = document.createElement("div");
     product.classList.add('cart-item-container');
 
@@ -11,12 +16,10 @@ export const createCartItem = ({ item, selectedItems, manufacturer, cartData, ma
         id: item.id,
         checked: selectedItems.has(item.id),
         onChange: (event) => {
-            console.log(event.target.checked);
             event.target.checked ? selectedItems.add(item.id) : selectedItems.delete(item.id)
-
             manufacturerCheckbox.checked = manufacturer.items.every(item => selectedItems.has(item.id));
-            renderCart(cart, cartData, selectedItems, deleteItemFromCart, handleCartQuantityChange);
-            CalculateSum(cartData, selectedItems)
+            renderCart();
+            CalculateSum();
         }
     });
     product.appendChild(checkbox);
@@ -40,16 +43,15 @@ export const createCartItem = ({ item, selectedItems, manufacturer, cartData, ma
         onInput: (event) => {
             const inputId = event.target.id;
             const inputQuantity = Number(event.target.value);
-            handleCartQuantityChange(inputId, inputQuantity)
+            CartContext.actions.handleCartQuantityChange(inputId, inputQuantity);
         }
-
-    })
-    product.appendChild(quantityInput)
+    });
+    product.appendChild(quantityInput);
 
     const buttonDelete = createButton({
         textContent: '',
         className: 'btn-del',
-        onClick: () => deleteItemFromCart(item.id)
+        onClick: () => CartContext.actions.deleteItemFromCart(item.id)
     });
     product.appendChild(buttonDelete);
 
@@ -59,7 +61,6 @@ export const createCartItem = ({ item, selectedItems, manufacturer, cartData, ma
     img.style.height = '30px';
     img.style.cursor = 'pointer';
     buttonDelete.appendChild(img);
-
 
     return product;
 }

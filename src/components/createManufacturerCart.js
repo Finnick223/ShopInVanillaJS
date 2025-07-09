@@ -1,8 +1,13 @@
 import { createInput } from './shared/input.js'
 import { createCartItem } from './createCartItem.js';
 import { createParagraph } from './shared/paragraph.js';
+import { CalculateSum } from '../utils/CalculateSum.js';
+import { CartContext } from '../context/CartContext.js';
+import { renderCart } from './renderCart.js';
 
-export const createManufacturerCart = ({ cart, manufacturer, selectedItems, cartData, renderCart, CalculateSum, deleteItemFromCart, handleCartQuantityChange }) => {
+export const createManufacturerCart = (manufacturer) => {
+    const { selectedItems, cartData } = CartContext;
+
     const manufacturerWrapper = document.createElement('div');
     manufacturerWrapper.classList.add('cart-manufacturer-container');
 
@@ -18,8 +23,8 @@ export const createManufacturerCart = ({ cart, manufacturer, selectedItems, cart
                     isChecked ? selectedItems.add(product.id) : selectedItems.delete(product.id);
                 }
             });
-            renderCart(cart, cartData, selectedItems, deleteItemFromCart, handleCartQuantityChange);
-            CalculateSum(cartData, selectedItems);
+            renderCart();
+            CalculateSum();
         },
     })
     manufacturerWrapper.appendChild(manufacturerCheckbox);
@@ -35,15 +40,8 @@ export const createManufacturerCart = ({ cart, manufacturer, selectedItems, cart
     for (const item of manufacturer.items) {
         const productNode = createCartItem({
             item,
-            selectedItems,
             manufacturer,
-            cartData,
             manufacturerCheckbox,
-            deleteItemFromCart,
-            handleCartQuantityChange,
-            renderCart,
-            cart,
-            CalculateSum
         });
         manufacturerWrapper.appendChild(productNode);
     }

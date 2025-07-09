@@ -1,8 +1,13 @@
+import { CartContext } from '../context/CartContext.js';
 import { createButton } from "./shared/button.js";
 import { createInput } from "./shared/input.js";
 import { createParagraph } from "./shared/paragraph.js";
 
-export const renderProducts = (productList, products, addProductToCart) => {
+export const renderProducts = () => {
+    const { products, elements: { productList } } = CartContext;
+
+    productList.replaceChildren();
+
     for (const product of products) {
         const productContainer = document.createElement("div");
         productContainer.classList.add('product-container');
@@ -38,25 +43,24 @@ export const renderProducts = (productList, products, addProductToCart) => {
         bottomSection.appendChild(productPrice);
 
         const buttons = document.createElement('div');
-        buttons.classList.add('product-buttons')
+        buttons.classList.add('product-buttons');
 
         const quantityInput = createInput({
             id: product.id,
             type: 'number',
-            value: product.quantity,
+            value: product.quantity ?? 1,
             min: 1,
             max: 99,
             inputMode: 'numeric',
             onInput: (event) => {
                 if (Number(event.target.value) <= 99) product.quantity = Number(event.target.value);
             }
-
-        })
+        });
 
         const buttonAdd = createButton({
             textContent: '',
             className: 'btn-add',
-            onClick: () => addProductToCart(product)
+            onClick: () => CartContext.actions.addProductToCart(product)
         });
 
         const img = document.createElement('img');
@@ -65,10 +69,8 @@ export const renderProducts = (productList, products, addProductToCart) => {
         img.style.height = '20px';
         buttonAdd.appendChild(img);
 
-        buttons.appendChild(quantityInput);
-        buttons.appendChild(buttonAdd);
+        buttons.append(quantityInput, buttonAdd);
         bottomSection.appendChild(buttons);
         productContainer.appendChild(bottomSection);
-
     }
 }

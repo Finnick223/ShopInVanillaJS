@@ -1,46 +1,37 @@
-import { CalculateSum } from "../utils/CalculateSum.js";
+import { CartContext } from '../context/CartContext.js';
 import { groupByManufacturer } from "../utils/groupByManufacturer.js";
+import { createManufacturerCart } from "./createManufacturerCart.js";
 import { createButton } from "./shared/button.js";
 import { createParagraph } from "./shared/paragraph.js";
-import { createManufacturerCart } from "./createManufacturerCart.js";
+import { CalculateSum } from "../utils/CalculateSum.js";
 
-export const renderCart = (cart, cartData, selectedItems, deleteItemFromCart, handleCartQuantityChange) => {
+export const renderCart = () => {
+    const { cartData, selectedItems } = CartContext;
+    const { cart } = CartContext.elements;
+
     cart.replaceChildren();
+
     const groupedProducts = groupByManufacturer(cartData);
 
-
     for (const manufacturer of groupedProducts) {
-        const manufacturerSection = createManufacturerCart({
-            manufacturer,
-            selectedItems,
-            cartData,
-            renderCart,
-            CalculateSum,
-            deleteItemFromCart,
-            handleCartQuantityChange,
-            renderCart,
-            cart
-        });
+        const manufacturerSection = createManufacturerCart(manufacturer);
         cart.appendChild(manufacturerSection);
     }
 
     const totalElement = createParagraph({ textContent: '', id: 'cart-total', className: 'cart-total' });
-
     const buyButton = createButton({
         textContent: 'BUY',
         type: 'submit',
         onClick: () => {
-            const selectedProductDetails = cartData.filter(item => selectedItems.has(item.id));
-            console.log("przedmioty zaznaczone do kupienia:", selectedProductDetails);
+            const selectedProducts = cartData.filter(item => selectedItems.has(item.id));
+            console.log('Selected items:', selectedProducts);
         }
     });
 
-    const footerWrapper = document.createElement('div');
-    footerWrapper.classList.add('cart-footer');
-    footerWrapper.appendChild(totalElement);
-    footerWrapper.appendChild(buyButton);
-    cart.appendChild(footerWrapper);
+    const footer = document.createElement('div');
+    footer.classList.add('cart-footer');
+    footer.append(totalElement, buyButton);
+    cart.appendChild(footer);
 
-    CalculateSum(cartData, selectedItems);
-
+    CalculateSum();
 }
