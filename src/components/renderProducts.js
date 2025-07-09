@@ -41,6 +41,7 @@ export const renderProducts = (productList, products, addProductToCart) => {
         buttons.classList.add('product-buttons')
 
         const quantityInput = createInput({
+            id: product.id,
             type: 'number',
             value: product.quantity,
             min: 1,
