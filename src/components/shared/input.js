@@ -1,4 +1,5 @@
 import { createButton } from "./button.js";
+import { createDiv } from "./div.js";
 
 export const createInput = ({ type, id, value, checked, min, max, inputMode, onInput, onChange }) => {
     const input = document.createElement('input');
@@ -15,9 +16,8 @@ export const createInput = ({ type, id, value, checked, min, max, inputMode, onI
     }
 
     if (type === 'number') {
-        const wrapper = document.createElement('div');
-        wrapper.className = 'quantity';
-        wrapper.appendChild(input);
+        const NumberInputWrapper = createDiv({ className: 'quantity' })
+        NumberInputWrapper.appendChild(input);
 
 
         if (value !== undefined) input.value = value;
@@ -36,11 +36,12 @@ export const createInput = ({ type, id, value, checked, min, max, inputMode, onI
             }
         });
 
-        const buttonsWrapper = document.createElement('div');
-        buttonsWrapper.className = 'quantity-buttons';
-
+        const buttonsWrapper = createDiv({ className: 'quantity-buttons' });
         const minusButton = createButton({ textContent: '-' });
         const plusButton = createButton({ textContent: '+' });
+        buttonsWrapper.appendChild(plusButton);
+        buttonsWrapper.appendChild(minusButton);
+        NumberInputWrapper.appendChild(buttonsWrapper);
 
         minusButton.addEventListener('click', (e) => {
             e.preventDefault();
@@ -66,10 +67,6 @@ export const createInput = ({ type, id, value, checked, min, max, inputMode, onI
             }
         });
 
-        buttonsWrapper.appendChild(plusButton);
-        buttonsWrapper.appendChild(minusButton);
-        wrapper.appendChild(buttonsWrapper);
-
-        return wrapper;
+        return NumberInputWrapper;
     }
 }

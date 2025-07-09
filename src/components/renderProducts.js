@@ -12,19 +12,15 @@ export const renderProducts = (productsToRender = CartContext.products) => {
     productsToRender = manufacturerFilter ? productsToRender.filter(item => item.manufacturer === manufacturerFilter) : productsToRender;
 
     for (const product of productsToRender) {
-        const productContainer = document.createElement("div");
-        productContainer.classList.add('product-container');
+        const productContainer = document.createDiv({ className: 'product-container' });
         productList.appendChild(productContainer);
 
-        const topSection = document.createElement('div');
-        topSection.classList.add('product-top');
+        const topSection = document.createDiv({ className: 'product-top' });
 
-        const imgPlaceholder = document.createElement('div');
-        imgPlaceholder.classList.add('product-image');
+        const imgPlaceholder = document.createDiv({ className: 'product-image' });
         topSection.appendChild(imgPlaceholder);
 
-        const productInfo = document.createElement('div');
-        productInfo.classList.add('product-info');
+        const productInfo = document.createDiv({ className: 'product-info' });
 
         const productName = document.createElement('h3');
         productName.textContent = product.name;
@@ -39,15 +35,11 @@ export const renderProducts = (productsToRender = CartContext.products) => {
         topSection.appendChild(productInfo);
         productContainer.appendChild(topSection);
 
-        const bottomSection = document.createElement('div');
-        bottomSection.classList.add('product-bottom');
-
+        const bottomSection = document.createDiv({ className: 'product-bottom' });
         const productPrice = createParagraph({ textContent: product.price + ' $' });
         bottomSection.appendChild(productPrice);
 
-        const buttons = document.createElement('div');
-        buttons.classList.add('product-buttons');
-
+        const buttons = document.createDiv({ className: 'product-buttons' });
         const quantityInput = createInput({
             id: product.id,
             type: 'number',
@@ -59,13 +51,11 @@ export const renderProducts = (productsToRender = CartContext.products) => {
                 if (Number(event.target.value) <= 99) product.quantity = Number(event.target.value);
             }
         });
-
         const buttonAdd = createButton({
             textContent: '',
             className: 'btn-add',
             onClick: () => CartContext.actions.addProductToCart(product)
         });
-
         const img = document.createElement('img');
         img.src = 'assets/cart.svg';
         img.alt = 'Add to cart';

@@ -4,12 +4,12 @@ import { createParagraph } from './shared/paragraph.js';
 import { CalculateSum } from '../utils/CalculateSum.js';
 import { CartContext } from '../context/CartContext.js';
 import { renderCart } from './renderCart.js';
+import { createDiv } from './shared/div.js';
 
 export const createManufacturerCart = (manufacturer) => {
     const { selectedItems, cartData } = CartContext;
 
-    const manufacturerWrapper = document.createElement('div');
-    manufacturerWrapper.classList.add('cart-manufacturer-container');
+    const manufacturerWrapper = createDiv({ className: 'cart-manufacturer-container' });
 
     const allItemsSelected = manufacturer.items.every(item => selectedItems.has(item.id));
     const manufacturerCheckbox = createInput({

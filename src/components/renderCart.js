@@ -4,6 +4,7 @@ import { createManufacturerCart } from "./createManufacturerCart.js";
 import { createButton } from "./shared/button.js";
 import { createParagraph } from "./shared/paragraph.js";
 import { CalculateSum } from "../utils/CalculateSum.js";
+import { createDiv } from './shared/div.js';
 
 export const renderCart = () => {
     const { cartData, selectedItems } = CartContext;
@@ -28,8 +29,7 @@ export const renderCart = () => {
         }
     });
 
-    const footer = document.createElement('div');
-    footer.classList.add('cart-footer');
+    const footer = createDiv({ className: 'cart-footer' });
     footer.append(totalElement, buyButton);
     cart.appendChild(footer);
 

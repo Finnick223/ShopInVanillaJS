@@ -4,12 +4,12 @@ import { createInput } from "./shared/input.js";
 import { createParagraph } from "./shared/paragraph.js";
 import { CalculateSum } from "../utils/CalculateSum.js";
 import { renderCart } from './renderCart.js';
+import { createDiv } from './shared/div.js';
 
 export const createCartItem = ({ item, manufacturer, manufacturerCheckbox }) => {
     const { selectedItems } = CartContext;
 
-    const product = document.createElement("div");
-    product.classList.add('cart-item-container');
+    const product = createDiv({ className: 'cart-item-container' });
 
     const checkbox = createInput({
         type: 'checkbox',
