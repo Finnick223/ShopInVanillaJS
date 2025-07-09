@@ -1,5 +1,6 @@
 import { CartContext } from '../context/CartContext.js';
 import { createButton } from "./shared/button.js";
+import { createDiv } from './shared/div.js';
 import { createInput } from "./shared/input.js";
 import { createParagraph } from "./shared/paragraph.js";
 
@@ -12,15 +13,15 @@ export const renderProducts = (productsToRender = CartContext.products) => {
     productsToRender = manufacturerFilter ? productsToRender.filter(item => item.manufacturer === manufacturerFilter) : productsToRender;
 
     for (const product of productsToRender) {
-        const productContainer = document.createDiv({ className: 'product-container' });
+        const productContainer = createDiv({ className: 'product-container' });
         productList.appendChild(productContainer);
 
-        const topSection = document.createDiv({ className: 'product-top' });
+        const topSection = createDiv({ className: 'product-top' });
 
-        const imgPlaceholder = document.createDiv({ className: 'product-image' });
+        const imgPlaceholder = createDiv({ className: 'product-image' });
         topSection.appendChild(imgPlaceholder);
 
-        const productInfo = document.createDiv({ className: 'product-info' });
+        const productInfo = createDiv({ className: 'product-info' });
 
         const productName = document.createElement('h3');
         productName.textContent = product.name;
@@ -35,11 +36,11 @@ export const renderProducts = (productsToRender = CartContext.products) => {
         topSection.appendChild(productInfo);
         productContainer.appendChild(topSection);
 
-        const bottomSection = document.createDiv({ className: 'product-bottom' });
+        const bottomSection = createDiv({ className: 'product-bottom' });
         const productPrice = createParagraph({ textContent: product.price + ' $' });
         bottomSection.appendChild(productPrice);
 
-        const buttons = document.createDiv({ className: 'product-buttons' });
+        const buttons = createDiv({ className: 'product-buttons' });
         const quantityInput = createInput({
             id: product.id,
             type: 'number',
