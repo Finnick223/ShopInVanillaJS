@@ -17,11 +17,9 @@ export const createManufacturerCart = (manufacturer) => {
         id: manufacturer.manufacturer,
         checked: allItemsSelected,
         onChange: (event) => {
-            const isChecked = event.target.checked;
-            cartData.forEach(product => {
-                if (product.manufacturer === event.target.id) {
-                    isChecked ? selectedItems.add(product.id) : selectedItems.delete(product.id);
-                }
+            const { checked, id } = event.target;
+            cartData.filter((product) => product.manufacturer === id).forEach(product => {
+                checked ? selectedItems.add(product.id) : selectedItems.delete(product.id);
             });
             renderCart();
             CalculateSum();

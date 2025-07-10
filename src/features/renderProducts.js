@@ -16,7 +16,7 @@ export const renderProducts = (productsToRender = CartContext.products) => {
         const productContainer = createDiv({ className: 'product-container' });
         productList.appendChild(productContainer);
 
-        const topSection = createDiv({ className: 'product-top' });
+        const topSection = createDiv({ className: 'product-top-section' });
 
         const imgPlaceholder = createDiv({ className: 'product-image' });
         topSection.appendChild(imgPlaceholder);
@@ -54,7 +54,7 @@ export const renderProducts = (productsToRender = CartContext.products) => {
         });
         const buttonAdd = createButton({
             textContent: '',
-            className: 'btn-add',
+            className: 'button-add',
             onClick: () => CartContext.actions.addProductToCart(product)
         });
         const img = document.createElement('img');

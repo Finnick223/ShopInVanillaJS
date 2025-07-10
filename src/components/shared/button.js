@@ -1,12 +1,12 @@
 export const createButton = ({ textContent, type = "button", className, id, onClick }) => {
-    const btn = document.createElement("button");
-    btn.textContent = textContent;
-    if (type) btn.type = type;
-    if (className) btn.classList.add(className);
-    if (id) btn.id = id;
+    const button = document.createElement("button");
+    button.textContent = textContent;
+    if (type) button.type = type;
+    if (className) button.classList.add(className);
+    if (id) button.id = id;
     if (typeof onClick === 'function') {
-        btn.addEventListener('click', onClick)
+        button.addEventListener('click', onClick)
     }
 
-    return btn;
+    return button;
 };

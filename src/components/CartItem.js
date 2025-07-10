@@ -50,7 +50,7 @@ export const createCartItem = ({ item, manufacturer, manufacturerCheckbox }) => 
 
     const buttonDelete = createButton({
         textContent: '',
-        className: 'btn-del',
+        className: 'button-del',
         onClick: () => CartContext.actions.deleteItemFromCart(item.id)
     });
     product.appendChild(buttonDelete);
@@ -58,8 +58,7 @@ export const createCartItem = ({ item, manufacturer, manufacturerCheckbox }) => 
     const img = document.createElement('img');
     img.src = 'assets/trash.svg';
     img.alt = 'Delete';
-    img.style.height = '30px';
-    img.style.cursor = 'pointer';
+    img.classList.add('icon-delete');
     buttonDelete.appendChild(img);
 
     return product;
