@@ -1,37 +1,22 @@
 import { CartContext } from '../context/CartContext.js';
 import { groupByManufacturer } from "../utils/groupByManufacturer.js";
 import { createManufacturerCart } from "../components/ManufacturerCart.js";
-import { createButton } from "../components/shared/button.js";
-import { createParagraph } from "../components/shared/paragraph.js";
 import { CalculateSum } from "../utils/CalculateSum.js";
-import { createDiv } from '../components/shared/div.js';
+import { createCartFooter } from "../components/CartFooter.js"
 
 export const renderCart = () => {
-    const { cartData, selectedItems } = CartContext;
+    const { cartData } = CartContext;
     const { cart } = CartContext.elements;
+    const groupedProducts = groupByManufacturer(cartData);
 
     cart.replaceChildren();
-
-    const groupedProducts = groupByManufacturer(cartData);
 
     for (const manufacturer of groupedProducts) {
         const manufacturerSection = createManufacturerCart(manufacturer);
         cart.appendChild(manufacturerSection);
     }
 
-    const totalElement = createParagraph({ textContent: '', id: 'cart-total', className: 'cart-total' });
-    const buyButton = createButton({
-        textContent: 'BUY',
-        type: 'submit',
-        onClick: () => {
-            const selectedProducts = cartData.filter(item => selectedItems.has(item.id));
-            console.log('Selected items:', selectedProducts);
-        }
-    });
-
-    const footer = createDiv({ className: 'cart-footer' });
-    footer.append(totalElement, buyButton);
-    cart.appendChild(footer);
+    cart.appendChild(createCartFooter());
 
     CalculateSum();
-}
+};

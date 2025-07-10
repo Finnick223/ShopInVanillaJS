@@ -32,6 +32,67 @@
         </section>
     </main>
 </body>
+
+<template id="product-card-template">
+    <div class="product-container">
+        <div class="product-top">
+            <div class="product-image"></div>
+            <div class="product-info">
+                <h3 class="product-name"></h3>
+                <p class="product-manufacturer"></p>
+            </div>
+        </div>
+        <p class="product-description">Short description</p>
+        <div class="product-bottom">
+            <p class="product-price"></p>
+            <div class="product-buttons">
+                <div class="quantity">
+                </div>
+                <button class="btn-add">
+                    <img src="assets/cart.svg" alt="Add to cart" style="height: 20px;">
+                </button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="manufacturer-cart-template">
+    <div class="cart-manufacturer-container">
+        <label class="manufacturer-label">
+            <input type="checkbox" class="manufacturer-checkbox">
+            <span class="manufacturer-name"></span>
+        </label>
+        <div class="manufacturer-items"></div>
+        <p class="manufacturer-sum-text"></p>
+    </div>
+</template>
+
+<template id="cart-item-template">
+    <div class="cart-item-container">
+        <input type="checkbox" class="item-checkbox" />
+        <p class="item-name"></p>
+        <p class="item-manufacturer"></p>
+        <p class="item-price"></p>
+        <div class="quantity">
+            <input type="number" class="item-quantity" min="1" max="99" />
+            <div class="quantity-buttons">
+                <button>+</button>
+                <button>-</button>
+            </div>
+        </div>
+        <button class="btn-del">
+            <img src="assets/trash.svg" alt="Delete" style="height:30px;cursor:pointer;" />
+        </button>
+    </div>
+</template>
+
+<template id="cart-footer-template">
+    <div class="cart-footer">
+        <p id="cart-total" class="cart-total"></p>
+        <button type="submit" class="cart-buy-button">BUY</button>
+    </div>
+</template>
+
 <script type="module" src="src/script.js"></script>
 
 </html>

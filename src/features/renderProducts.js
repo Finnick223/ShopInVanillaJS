@@ -1,8 +1,5 @@
 import { CartContext } from '../context/CartContext.js';
-import { createButton } from "../components/shared/button.js";
-import { createDiv } from '../components/shared/div.js';
-import { createInput } from "../components/shared/input.js";
-import { createParagraph } from "../components/shared/paragraph.js";
+import { createInput } from '../components/shared/input.js';
 
 export const renderProducts = (productsToRender = CartContext.products) => {
     const { productList } = CartContext.elements;
@@ -12,35 +9,17 @@ export const renderProducts = (productsToRender = CartContext.products) => {
     const manufacturerFilter = urlParams.get('manufacturer');
     productsToRender = manufacturerFilter ? productsToRender.filter(item => item.manufacturer === manufacturerFilter) : productsToRender;
 
+    const template = document.getElementById('product-card-template');
+
     for (const product of productsToRender) {
-        const productContainer = createDiv({ className: 'product-container' });
-        productList.appendChild(productContainer);
+        const clone = template.content.cloneNode(true);
 
-        const topSection = createDiv({ className: 'product-top' });
+        clone.querySelector('.product-name').textContent = product.name;
+        clone.querySelector('.product-manufacturer').textContent = product.manufacturer;
+        clone.querySelector('.product-price').textContent = `${product.price} $`;
+        clone.querySelector('.btn-add').addEventListener('click', () => CartContext.actions.addProductToCart(product));
 
-        const imgPlaceholder = createDiv({ className: 'product-image' });
-        topSection.appendChild(imgPlaceholder);
-
-        const productInfo = createDiv({ className: 'product-info' });
-
-        const productName = document.createElement('h3');
-        productName.textContent = product.name;
-        productInfo.appendChild(productName);
-
-        const productManufacturer = createParagraph({ textContent: product.manufacturer });
-        productInfo.appendChild(productManufacturer);
-
-        const description = createParagraph({ textContent: 'Short description' });
-        productInfo.appendChild(description);
-
-        topSection.appendChild(productInfo);
-        productContainer.appendChild(topSection);
-
-        const bottomSection = createDiv({ className: 'product-bottom' });
-        const productPrice = createParagraph({ textContent: product.price + ' $' });
-        bottomSection.appendChild(productPrice);
-
-        const buttons = createDiv({ className: 'product-buttons' });
+        const inputWrapper = clone.querySelector('.quantity');
         const quantityInput = createInput({
             id: product.id,
             type: 'number',
@@ -52,19 +31,8 @@ export const renderProducts = (productsToRender = CartContext.products) => {
                 if (Number(event.target.value) <= 99) product.quantity = Number(event.target.value);
             }
         });
-        const buttonAdd = createButton({
-            textContent: '',
-            className: 'btn-add',
-            onClick: () => CartContext.actions.addProductToCart(product)
-        });
-        const img = document.createElement('img');
-        img.src = 'assets/cart.svg';
-        img.alt = 'Add to cart';
-        img.style.height = '20px';
-        buttonAdd.appendChild(img);
+        inputWrapper.appendChild(quantityInput);
 
-        buttons.append(quantityInput, buttonAdd);
-        bottomSection.appendChild(buttons);
-        productContainer.appendChild(bottomSection);
+        productList.appendChild(clone);
     }
 }

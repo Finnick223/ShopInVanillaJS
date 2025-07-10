@@ -1,6 +1,3 @@
-import { createButton } from "./button.js";
-import { createDiv } from "./div.js";
-
 export const createInput = ({ type, id, value, checked, min, max, inputMode, onInput, onChange }) => {
     const input = document.createElement('input');
     input.type = type;
@@ -11,42 +8,48 @@ export const createInput = ({ type, id, value, checked, min, max, inputMode, onI
         if (typeof onChange === 'function') {
             input.addEventListener('change', onChange);
         }
-
         return input;
     }
 
     if (type === 'number') {
-        const NumberInputWrapper = createDiv({ className: 'quantity' })
-        NumberInputWrapper.appendChild(input);
-
+        const numberInputWrapper = document.createElement('div');
+        numberInputWrapper.className = 'quantity';
 
         if (value !== undefined) input.value = value;
         if (min !== undefined) input.min = min;
         if (max !== undefined) input.max = max;
         if (inputMode) input.inputMode = inputMode;
-        if (typeof onInput === 'function') {
-            input.addEventListener('input', onInput);
-        }
+
         input.addEventListener('input', (event) => {
             input.value = input.value.replace(/[^\d]/g, '');
-            let sanitazedDigits = parseInt(input.value.replace(/[^\d]/g, ''), 10);
-            sanitazedDigits <= 99 ? input.value = sanitazedDigits : input.value = 99;
-            if (typeof onInput === 'function') {
-                onInput(event);
-            }
+            let sanitizedValue = parseInt(input.value, 10) || 0;
+            if (sanitizedValue > (max ?? 99)) sanitizedValue = max ?? 99;
+            input.value = sanitizedValue;
+
+            if (typeof onInput === 'function') onInput(event);
         });
 
-        const buttonsWrapper = createDiv({ className: 'quantity-buttons' });
-        const minusButton = createButton({ textContent: '-' });
-        const plusButton = createButton({ textContent: '+' });
+        numberInputWrapper.appendChild(input);
+
+        const buttonsWrapper = document.createElement('div');
+        buttonsWrapper.className = 'quantity-buttons';
+
+        const minusButton = document.createElement('button');
+        minusButton.textContent = '-';
+        minusButton.type = 'button';
+
+        const plusButton = document.createElement('button');
+        plusButton.textContent = '+';
+        plusButton.type = 'button';
+
         buttonsWrapper.appendChild(plusButton);
         buttonsWrapper.appendChild(minusButton);
-        NumberInputWrapper.appendChild(buttonsWrapper);
+        numberInputWrapper.appendChild(buttonsWrapper);
 
         minusButton.addEventListener('click', (e) => {
             e.preventDefault();
             let current = parseInt(input.value, 10) || 0;
-            if (current > min) {
+            if (current > (min ?? 1)) {
                 current--;
                 input.value = current;
                 input.dispatchEvent(new Event('input'));
@@ -67,6 +70,6 @@ export const createInput = ({ type, id, value, checked, min, max, inputMode, onI
             }
         });
 
-        return NumberInputWrapper;
+        return numberInputWrapper;
     }
 }
