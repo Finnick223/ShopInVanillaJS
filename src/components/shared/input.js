@@ -1,7 +1,6 @@
-export const createInput = ({ type, id, value, checked, min, max, inputMode, onInput, onChange }) => {
+export const createInput = ({ type, id, value, checked, min, max, inputMode, onInput, onChange, onDecrease, onIncrease }) => {
     const input = document.createElement('input');
-    input.type = type;
-    if (id) input.id = id;
+    Object.assign(input, { type, id });
 
     if (type === 'checkbox') {
         input.checked = !!checked;
@@ -15,18 +14,16 @@ export const createInput = ({ type, id, value, checked, min, max, inputMode, onI
         const numberInputWrapper = document.createElement('div');
         numberInputWrapper.className = 'quantity';
 
-        if (value !== undefined) input.value = value;
-        if (min !== undefined) input.min = min;
-        if (max !== undefined) input.max = max;
-        if (inputMode) input.inputMode = inputMode;
+        Object.assign(input, { value, min, max, inputMode });
+        if (typeof onInput === 'function') {
+            input.addEventListener('input', onInput);
+        }
 
         input.addEventListener('input', (event) => {
             input.value = input.value.replace(/[^\d]/g, '');
-            let sanitizedValue = parseInt(input.value, 10) || 0;
-            if (sanitizedValue > (max ?? 99)) sanitizedValue = max ?? 99;
-            input.value = sanitizedValue;
-
-            if (typeof onInput === 'function') onInput(event);
+            let sanitazedDigits = parseInt(input.value.replace(/[^\d]/g, ''), 10);
+            sanitazedDigits <= 99 ? input.value = sanitazedDigits : input.value = 99;
+            typeof onInput === 'function' && onInput(event);
         });
 
         numberInputWrapper.appendChild(input);
@@ -54,7 +51,7 @@ export const createInput = ({ type, id, value, checked, min, max, inputMode, onI
                 input.value = current;
                 input.dispatchEvent(new Event('input'));
                 input.dispatchEvent(new Event('change'));
-                if (typeof onDecrease === 'function') onDecrease(current);
+                typeof onDecrease === 'function' && onDecrease(current);
             }
         });
 
@@ -66,7 +63,7 @@ export const createInput = ({ type, id, value, checked, min, max, inputMode, onI
                 input.value = current;
                 input.dispatchEvent(new Event('input'));
                 input.dispatchEvent(new Event('change'));
-                if (typeof onIncrease === 'function') onIncrease(current);
+                typeof onIncrease === 'function' && onIncrease(current);
             }
         });
 
