@@ -3,7 +3,7 @@ import { createButton } from "./shared/button.js";
 import { createInput } from "./shared/input.js";
 import { createParagraph } from "./shared/paragraph.js";
 import { CalculateSum } from "../utils/CalculateSum.js";
-import { renderCart } from './renderCart.js';
+import { renderCart } from '../features/renderCart.js'
 import { createDiv } from './shared/div.js';
 
 export const createCartItem = ({ item, manufacturer, manufacturerCheckbox }) => {

@@ -1,10 +1,10 @@
 import { CartContext } from '../context/CartContext.js';
 import { groupByManufacturer } from "../utils/groupByManufacturer.js";
-import { createManufacturerCart } from "./createManufacturerCart.js";
-import { createButton } from "./shared/button.js";
-import { createParagraph } from "./shared/paragraph.js";
+import { createManufacturerCart } from "../components/ManufacturerCart.js";
+import { createButton } from "../components/shared/button.js";
+import { createParagraph } from "../components/shared/paragraph.js";
 import { CalculateSum } from "../utils/CalculateSum.js";
-import { createDiv } from './shared/div.js';
+import { createDiv } from '../components/shared/div.js';
 
 export const renderCart = () => {
     const { cartData, selectedItems } = CartContext;

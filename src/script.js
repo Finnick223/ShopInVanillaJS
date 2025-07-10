@@ -1,36 +1,13 @@
 "use strict";
 import { CartContext } from './context/CartContext.js';
 import { getElementsFromDOM } from './utils/getElementsFromDOM.js';
-import { renderProducts } from './components/renderProducts.js';
-import { renderCart } from './components/renderCart.js';
-import { getCartFromLocalStorage, updateLocalStorage } from './utils/handleLocalStorage.js';
-import { createManufacturerFilter } from './components/createManufacturerFilter.js';
-
-
-const addProductToCart = (product) => {
-    const existingItem = CartContext.cartData.find((item) => item.name === product.name);
-    if (!existingItem) CartContext.cartData.push({ ...product });
-    else existingItem.quantity = Math.min(existingItem.quantity + product.quantity, 99);
-    updateLocalStorage(CartContext.cartData);
-    renderCart();
-};
-
-const deleteItemFromCart = (id) => {
-    const indexOfDeletedItem = CartContext.cartData.findIndex(item => item.id === id);
-    if (indexOfDeletedItem !== -1) CartContext.cartData.splice(indexOfDeletedItem, 1);
-    updateLocalStorage(CartContext.cartData);
-    renderCart();
-};
-
-const handleCartQuantityChange = (id, quantity) => {
-    if (quantity < 1 && quantity > 99) return
-    const item = CartContext.cartData.find(i => i.id === id);
-    if (item) {
-        item.quantity = quantity;
-        updateLocalStorage(CartContext.cartData);
-        renderCart();
-    }
-};
+import { renderProducts } from './features/renderProducts.js';
+import { renderCart } from './features/renderCart.js';
+import { getCartFromLocalStorage } from './utils/handleLocalStorage.js';
+import { createManufacturerFilter } from './components/ManufacturerFilter.js';
+import { addProductToCart } from './services/addProductToCart.js';
+import { deleteItemFromCart } from './services/deleteItemFromCart.js';
+import { handleCartQuantityChange } from './services/handleCartQuantityChange.js';
 
 const init = () => {
     const { productList, cart, searchInput } = getElementsFromDOM();

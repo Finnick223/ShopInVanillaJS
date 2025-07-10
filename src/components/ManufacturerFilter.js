@@ -1,6 +1,6 @@
 import { CartContext } from "../context/CartContext.js";
 import { getElementsFromDOM } from "../utils/getElementsFromDOM.js";
-import { renderProducts } from "./renderProducts.js";
+import { renderProducts } from "../features/renderProducts.js";
 
 export const createManufacturerFilter = () => {
     const { manufacturerSelect } = getElementsFromDOM();
@@ -13,6 +13,8 @@ export const createManufacturerFilter = () => {
         option.textContent = name;
         manufacturerSelect.appendChild(option);
     });
+
+    manufacturerSelect.value = new URL(window.location).searchParams.get('manufacturer') || '';
 
     manufacturerSelect.addEventListener('change', (event) => {
         const selected = event.target.value;

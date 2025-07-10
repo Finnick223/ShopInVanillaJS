@@ -1,8 +1,8 @@
 import { CartContext } from '../context/CartContext.js';
-import { createButton } from "./shared/button.js";
-import { createDiv } from './shared/div.js';
-import { createInput } from "./shared/input.js";
-import { createParagraph } from "./shared/paragraph.js";
+import { createButton } from "../components/shared/button.js";
+import { createDiv } from '../components/shared/div.js';
+import { createInput } from "../components/shared/input.js";
+import { createParagraph } from "../components/shared/paragraph.js";
 
 export const renderProducts = (productsToRender = CartContext.products) => {
     const { productList } = CartContext.elements;
