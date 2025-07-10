@@ -9,14 +9,14 @@
 </head>
 
 <body>
-    <main id="content">
+    <main class="content">
         <section class="shop">
             <header class="shop-header">
                 <img src="/assets/shop.svg" alt="Logo" height="15px" />
                 <h3>THE SHOP</h2>
             </header>
-            <input type="text" id="search-products" placeholder="Search products..." />
-            <select id="manufacturer-select">
+            <input type="text" id="search-products" class="search-products" placeholder="Search products..." />
+            <select id="manufacturer-select" class="manufacturer-select">
                 <option value="">All Manufacturers</option>
             </select>
             <div class="product-list-wrapper">
@@ -35,7 +35,7 @@
 
 <template id="product-card-template">
     <div class="product-container">
-        <div class="product-top">
+        <div class="product-top-section">
             <div class="product-image"></div>
             <div class="product-info">
                 <h3 class="product-name"></h3>
@@ -48,7 +48,7 @@
             <div class="product-buttons">
                 <div class="quantity">
                 </div>
-                <button class="btn-add">
+                <button class="button-add">
                     <img src="assets/cart.svg" alt="Add to cart" style="height: 20px;">
                 </button>
             </div>
@@ -80,7 +80,7 @@
                 <button>-</button>
             </div>
         </div>
-        <button class="btn-del">
+        <button class="button-del">
             <img src="assets/trash.svg" alt="Delete" style="height:30px;cursor:pointer;" />
         </button>
     </div>

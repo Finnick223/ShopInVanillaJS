@@ -4,7 +4,7 @@ export const getElementsFromDOM = () => {
     const searchInput = document.querySelector('#search-products');
     const manufacturerSelect = document.getElementById('manufacturer-select');
 
-    if (!productList || !cart || !searchInput || !manufacturerSelect)
+    if (!(productList || cart || searchInput || manufacturerSelect))
         throw new Error('Core elements not found');
 
     return {

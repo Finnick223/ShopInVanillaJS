@@ -17,7 +17,7 @@ export const renderProducts = (productsToRender = CartContext.products) => {
         clone.querySelector('.product-name').textContent = product.name;
         clone.querySelector('.product-manufacturer').textContent = product.manufacturer;
         clone.querySelector('.product-price').textContent = `${product.price} $`;
-        clone.querySelector('.btn-add').addEventListener('click', () => CartContext.actions.addProductToCart(product));
+        clone.querySelector('.button-add').addEventListener('click', () => CartContext.actions.addProductToCart(product));
 
         const inputWrapper = clone.querySelector('.quantity');
         const quantityInput = createInput({
