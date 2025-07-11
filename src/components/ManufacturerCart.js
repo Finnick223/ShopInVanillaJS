@@ -1,5 +1,4 @@
 import { createCartItem } from './CartItem.js';
-import { CalculateSum } from '../utils/CalculateSum.js';
 import { CartContext } from '../context/CartContext.js';
 import { renderCart } from '../features/renderCart.js';
 
@@ -28,7 +27,6 @@ export const createManufacturerCart = (manufacturer) => {
             }
         });
         renderCart();
-        CalculateSum();
     });
 
     for (const item of manufacturer.items) {

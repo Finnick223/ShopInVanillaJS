@@ -1,5 +1,4 @@
 import { CartContext } from '../context/CartContext.js';
-import { CalculateSum } from "../utils/CalculateSum.js";
 import { renderCart } from '../features/renderCart.js'
 import { createInput } from './shared/input.js';
 
@@ -14,7 +13,6 @@ export const createCartItem = ({ item, manufacturer, manufacturerCheckbox }) => 
         event.target.checked ? CartContext.selectedItems.add(item.id) : CartContext.selectedItems.delete(item.id);
         manufacturerCheckbox.checked = manufacturer.items.every(item => CartContext.selectedItems.has(item.id));
         renderCart();
-        CalculateSum();
     });
 
     product.querySelector('.cart-item__name').textContent = item.name;

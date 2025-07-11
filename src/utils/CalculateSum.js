@@ -1,6 +1,6 @@
 import { CartContext } from "../context/CartContext.js";
 
-export const CalculateSum = () => {
+export const calculateSum = () => {
     const { cartData, selectedItems } = CartContext;
     let total = 0;
     for (const item of cartData) {
