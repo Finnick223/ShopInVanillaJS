@@ -35,21 +35,20 @@
 
 <template id="product-card-template">
     <div class="product">
-        <div class="product__topsection">
-            <div class="topsection__image"></div>
-            <div class="topsection__info">
-                <h3 class="topsection__name"></h3>
-                <p class="topsection__manufacturer"></p>
+        <div class="product__header">
+            <div class="product__image"></div>
+            <div class="product__info">
+                <h3 class="product__name"></h3>
+                <p class="product__manufacturer"></p>
             </div>
         </div>
         <p class="product__description">Short description</p>
-        <div class="product__bottomsection">
-            <p class="bottomsection__price"></p>
-            <div class="bottomsection__actions">
-                <div class="quantity">
-                </div>
-                <button class="button--add">
-                    <img src="assets/cart.svg" alt="Add to cart" style="height: 20px;">
+        <div class="product__footer">
+            <p class="product__price"></p>
+            <div class="product__actions">
+                <div class="quantity"></div>
+                <button class="product__add-button">
+                    <img src="assets/cart.svg" alt="Add to cart">
                 </button>
             </div>
         </div>
@@ -63,7 +62,7 @@
             <span class="cart-manufacturer__name"></span>
         </label>
         <div class="cart-manufacturer__items"></div>
-        <p class="cart-manufacturer__sum"></p>
+        <p class="cart-manufacturer__sum-text"></p>
     </div>
 </template>
 
@@ -74,8 +73,8 @@
         <p class="cart-item__manufacturer"></p>
         <p class="cart-item__price"></p>
         <div class="quantity"></div>
-        <button class="button--delete">
-            <img src="assets/trash.svg" alt="Delete" style="height:30px;cursor:pointer;" />
+        <button>
+            <img src="assets/trash.svg" alt="Delete" class="cart-item__delete-button" />
         </button>
     </div>
 </template>

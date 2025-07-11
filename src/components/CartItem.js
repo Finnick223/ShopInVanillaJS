@@ -37,7 +37,7 @@ export const createCartItem = ({ item, manufacturer, manufacturerCheckbox }) => 
     });
     quantity.appendChild(quantityInput);
 
-    const buttonDelete = product.querySelector('.button--delete');
+    const buttonDelete = product.querySelector('.cart-item__delete-button');
     buttonDelete.addEventListener('click', () => CartContext.actions.deleteItemFromCart(item.id));
 
     return product;

@@ -14,10 +14,10 @@ export const renderProducts = (productsToRender = CartContext.products) => {
     for (const product of productsToRender) {
         const clone = template.content.cloneNode(true);
 
-        clone.querySelector('.topsection__name').textContent = product.name;
-        clone.querySelector('.topsection__manufacturer').textContent = product.manufacturer;
-        clone.querySelector('.bottomsection__price').textContent = `${product.price} $`;
-        clone.querySelector('.button--add').addEventListener('click', () => CartContext.actions.addProductToCart(product));
+        clone.querySelector('.product__name').textContent = product.name;
+        clone.querySelector('.product__manufacturer').textContent = product.manufacturer;
+        clone.querySelector('.product__price').textContent = `${product.price} $`;
+        clone.querySelector('.product__add-button').addEventListener('click', () => CartContext.actions.addProductToCart(product));
 
         const inputWrapper = clone.querySelector('.quantity');
         const quantityInput = createInput({

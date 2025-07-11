@@ -13,7 +13,7 @@ export const createManufacturerCart = (manufacturer) => {
     const checkbox = wrapper.querySelector('.cart-manufacturer__checkbox');
     const nameSpan = wrapper.querySelector('.cart-manufacturer__name');
     const itemsContainer = wrapper.querySelector('.cart-manufacturer__items');
-    const sumText = wrapper.querySelector('.cart-manufacturer__sum');
+    const sumText = wrapper.querySelector('.cart-manufacturer__sum-text');
 
     const allItemsSelected = manufacturer.items.every(item => selectedItems.has(item.id));
     checkbox.id = manufacturer.manufacturer;
