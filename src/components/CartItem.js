@@ -23,14 +23,16 @@ export const createCartItem = ({ item, manufacturer, manufacturerCheckbox }) => 
 
     const quantity = product.querySelector('.quantity');
     const quantityInput = createInput({
-        id: product.id,
         type: 'number',
-        value: product.quantity ?? 1,
+        value: item.quantity,
+        id: item.id,
         min: 1,
         max: 99,
         inputMode: 'numeric',
         onInput: (event) => {
-            if (Number(event.target.value) <= 99) product.quantity = Number(event.target.value);
+            const inputId = event.target.id;
+            const inputQuantity = Number(event.target.value);
+            CartContext.actions.handleCartQuantityChange(inputId, inputQuantity);
         }
     });
     quantity.appendChild(quantityInput);

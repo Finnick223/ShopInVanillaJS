@@ -7,8 +7,8 @@ export const CartContext = {
         cart: null,
     },
     actions: {
-        addProductToCart: () => { },
-        deleteItemFromCart: () => { },
-        handleCartQuantityChange: () => { },
+        addProductToCart: (_product) => console.warn('addProductToCart not initialized'),
+        deleteProductFromCart: (_id) => console.warn('deleteProductFromCart not initialized'),
+        handleCartQuantityChange: (_id, _quantity) => console.warn('handleCartQuantityChange not initialized'),
     }
 };
