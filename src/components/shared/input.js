@@ -1,6 +1,3 @@
-import { createButton } from "./button.js";
-import { createDiv } from "./div.js";
-
 export const createInput = ({ type, id, value, checked, min, max, inputMode, onInput, onChange, onDecrease, onIncrease }) => {
     const input = document.createElement('input');
     Object.assign(input, { type, id });
@@ -10,14 +7,12 @@ export const createInput = ({ type, id, value, checked, min, max, inputMode, onI
         if (typeof onChange === 'function') {
             input.addEventListener('change', onChange);
         }
-
         return input;
     }
 
     if (type === 'number') {
-        const numberInputWrapper = createDiv({ className: 'quantity' })
-        numberInputWrapper.appendChild(input);
-
+        const numberInputWrapper = document.createElement('div');
+        numberInputWrapper.className = 'quantity';
 
         Object.assign(input, { value, min, max, inputMode });
         if (typeof onInput === 'function') {
@@ -31,9 +26,19 @@ export const createInput = ({ type, id, value, checked, min, max, inputMode, onI
             typeof onInput === 'function' && onInput(event);
         });
 
-        const buttonsWrapper = createDiv({ className: 'quantity-buttons' });
-        const minusButton = createButton({ textContent: '-' });
-        const plusButton = createButton({ textContent: '+' });
+        numberInputWrapper.appendChild(input);
+
+        const buttonsWrapper = document.createElement('div');
+        buttonsWrapper.className = 'quantity__actions';
+
+        const minusButton = document.createElement('button');
+        minusButton.textContent = '-';
+        minusButton.type = 'button';
+
+        const plusButton = document.createElement('button');
+        plusButton.textContent = '+';
+        plusButton.type = 'button';
+
         buttonsWrapper.appendChild(plusButton);
         buttonsWrapper.appendChild(minusButton);
         numberInputWrapper.appendChild(buttonsWrapper);
@@ -41,7 +46,7 @@ export const createInput = ({ type, id, value, checked, min, max, inputMode, onI
         minusButton.addEventListener('click', (e) => {
             e.preventDefault();
             let current = parseInt(input.value, 10) || 0;
-            if (current > min) {
+            if (current > (min ?? 1)) {
                 current--;
                 input.value = current;
                 input.dispatchEvent(new Event('input'));

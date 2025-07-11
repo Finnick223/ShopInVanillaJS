@@ -11,27 +11,81 @@
 <body>
     <main id="content" class="content">
         <section class="shop">
-            <header class="shop-header">
+            <header class="shop__header">
                 <img src="/assets/shop.svg" alt="Logo" height="15px" />
                 <h3>THE SHOP</h2>
             </header>
-            <input type="text" id="search-products" class="search-products" placeholder="Search products..." />
-            <select id="manufacturer-select" class="manufacturer-select">
+            <input type="text" id="search-products" class="shop__input" placeholder="Search products..." />
+            <select id="manufacturer-select" class="shop__select">
                 <option value="">All Manufacturers</option>
             </select>
-            <div class="product-list-wrapper">
-                <div class="product-list"></div>
+            <div class="shop-list">
+                <div class="shop-list__elements"></div>
             </div>
         </section>
         <section class="cart">
-            <header class="cart-header">
+            <header class="cart__header">
                 <img src="/assets/cart.svg" alt="Logo" height="15px" />
                 <h3>THE CART</h3>
             </header>
-            <div class="cart-content"></div>
+            <div class="cart__content"></div>
         </section>
     </main>
 </body>
+
+<template id="product-card-template">
+    <div class="product">
+        <div class="product__header">
+            <div class="product__image"></div>
+            <div class="product__info">
+                <h3 class="product__name"></h3>
+                <p class="product__manufacturer"></p>
+            </div>
+        </div>
+        <p class="product__description">Short description</p>
+        <div class="product__footer">
+            <p class="product__price"></p>
+            <div class="product__actions">
+                <div class="quantity"></div>
+                <button class="product__add-button">
+                    <img src="assets/cart.svg" alt="Add to cart">
+                </button>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id="manufacturer-cart-template">
+    <div class="cart-manufacturer">
+        <label class="cart-manufacturer__label">
+            <input type="checkbox" class="cart-manufacturer__checkbox">
+            <span class="cart-manufacturer__name"></span>
+        </label>
+        <div class="cart-manufacturer__items"></div>
+        <p class="cart-manufacturer__sum-text"></p>
+    </div>
+</template>
+
+<template id="cart-item-template">
+    <div class="cart-item">
+        <input type="checkbox" class="cart-item__checkbox" />
+        <p class="cart-item__name"></p>
+        <p class="cart-item__manufacturer"></p>
+        <p class="cart-item__price"></p>
+        <div class="quantity"></div>
+        <button>
+            <img src="assets/trash.svg" alt="Delete" class="cart-item__delete-button" />
+        </button>
+    </div>
+</template>
+
+<template id="cart-footer-template">
+    <div class="footer">
+        <p id="cart-total" class="footer__total"></p>
+        <button type="submit" class="footer__submit-button">BUY</button>
+    </div>
+</template>
+
 <script type="module" src="src/script.js"></script>
 
 </html>

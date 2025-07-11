@@ -5,16 +5,14 @@ import { renderProducts } from './features/renderProducts.js';
 import { renderCart } from './features/renderCart.js';
 import { getCartFromLocalStorage } from './utils/handleLocalStorage.js';
 import { createManufacturerFilter } from './components/ManufacturerFilter.js';
-import { addProductToCart } from './services/addProductToCart.js';
-import { deleteItemFromCart } from './services/deleteItemFromCart.js';
-import { handleCartQuantityChange } from './services/handleCartQuantityChange.js';
+import { CartService } from './services/cartService.js';
 
 const init = () => {
     const { productList, cart, searchInput } = getElementsFromDOM();
     CartContext.elements.productList = productList;
     CartContext.elements.cart = cart;
     CartContext.cartData = getCartFromLocalStorage();
-    CartContext.actions = { addProductToCart, deleteItemFromCart, handleCartQuantityChange };
+    CartContext.actions = CartService;
     renderCart();
 
     searchInput.addEventListener("input", (event) => {

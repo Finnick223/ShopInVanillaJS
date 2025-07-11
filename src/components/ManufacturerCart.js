@@ -1,59 +1,50 @@
-import { createInput } from './shared/input.js'
 import { createCartItem } from './CartItem.js';
-import { createParagraph } from './shared/paragraph.js';
 import { CalculateSum } from '../utils/CalculateSum.js';
 import { CartContext } from '../context/CartContext.js';
-import { renderCart } from '../features/renderCart.js'
-import { createDiv } from './shared/div.js';
+import { renderCart } from '../features/renderCart.js';
 
 export const createManufacturerCart = (manufacturer) => {
     const { selectedItems, cartData } = CartContext;
 
-    const manufacturerWrapper = createDiv({ className: 'cart-manufacturer-container' });
+    const template = document.getElementById('manufacturer-cart-template');
+    const clone = template.content.cloneNode(true);
+
+    const wrapper = clone.querySelector('.cart-manufacturer');
+    const checkbox = wrapper.querySelector('.cart-manufacturer__checkbox');
+    const nameSpan = wrapper.querySelector('.cart-manufacturer__name');
+    const itemsContainer = wrapper.querySelector('.cart-manufacturer__items');
+    const sumText = wrapper.querySelector('.cart-manufacturer__sum-text');
 
     const allItemsSelected = manufacturer.items.every(item => selectedItems.has(item.id));
-    const manufacturerCheckbox = createInput({
-        type: 'checkbox',
-        id: manufacturer.manufacturer,
-        checked: allItemsSelected,
-        onChange: (event) => {
-            const { checked, id } = event.target;
-            cartData.filter((product) => product.manufacturer === id).forEach(product => {
-                checked ? selectedItems.add(product.id) : selectedItems.delete(product.id);
-            });
-            renderCart();
-            CalculateSum();
-        },
-    })
-    manufacturerWrapper.appendChild(manufacturerCheckbox);
+    checkbox.id = manufacturer.manufacturer;
+    checkbox.checked = allItemsSelected;
+    nameSpan.textContent = manufacturer.manufacturer;
 
-    const label = document.createElement('label');
-    label.setAttribute('for', manufacturer.manufacturer);
-    label.classList.add('manufacturer-label')
-    label.appendChild(manufacturerCheckbox);
-    label.appendChild(document.createTextNode(manufacturer.manufacturer));
-    manufacturerWrapper.appendChild(label);
-
+    checkbox.addEventListener('change', (event) => {
+        const isChecked = event.target.checked;
+        cartData.forEach(product => {
+            if (product.manufacturer === event.target.id) {
+                isChecked ? selectedItems.add(product.id) : selectedItems.delete(product.id);
+            }
+        });
+        renderCart();
+        CalculateSum();
+    });
 
     for (const item of manufacturer.items) {
         const productNode = createCartItem({
             item,
             manufacturer,
-            manufacturerCheckbox,
+            manufacturerCheckbox: checkbox,
         });
-        manufacturerWrapper.appendChild(productNode);
+        itemsContainer.appendChild(productNode);
     }
 
     const sum = manufacturer.items
         .filter(item => selectedItems.has(item.id))
-        .reduce((sum, item) => sum + (item.quantity * item.price), 0)
+        .reduce((total, item) => total + (item.quantity * item.price), 0)
         .toFixed(2);
+    sumText.textContent = 'Total: ' + sum + '$';
 
-    const totalManufacturerPrice = createParagraph({
-        textContent: 'Total: ' + sum + '$',
-        className: 'manufacturer-sum-text'
-    });
-    manufacturerWrapper.appendChild(totalManufacturerPrice);
-
-    return manufacturerWrapper;
-}
+    return wrapper;
+};
