@@ -2,10 +2,11 @@
 import { CartContext } from './context/CartContext.js';
 import { getElementsFromDOM } from './utils/getElementsFromDOM.js';
 import { renderProducts } from './features/renderProducts.js';
-import { renderCart } from './features/renderCart.js';
+import { renderCart } from './features/Cart/renderCart.js';
 import { getCartFromLocalStorage } from './utils/handleLocalStorage.js';
 import { createManufacturerFilter } from './components/ManufacturerFilter.js';
 import { CartService } from './services/cartService.js';
+import { handleCartCheckboxChange } from './features/Cart/handleCartCheckboxChange.js'
 
 const init = () => {
     const { productList, cart, searchInput } = getElementsFromDOM();
@@ -13,6 +14,8 @@ const init = () => {
     CartContext.elements.cart = cart;
     CartContext.cartData = getCartFromLocalStorage();
     CartContext.actions = CartService;
+
+    cart.addEventListener('change', handleCartCheckboxChange);
     renderCart();
 
     searchInput.addEventListener("input", (event) => {

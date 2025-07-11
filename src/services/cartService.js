@@ -1,6 +1,6 @@
 import { CartContext } from "../context/CartContext.js";
 import { updateLocalStorage } from "../utils/handleLocalStorage.js";
-import { renderCart } from "../features/renderCart.js";
+import { renderCart } from "../features/Cart/renderCart.js";
 
 export const CartService = {
     addProductToCart(product) {

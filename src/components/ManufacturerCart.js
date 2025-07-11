@@ -1,9 +1,8 @@
 import { createCartItem } from './CartItem.js';
 import { CartContext } from '../context/CartContext.js';
-import { renderCart } from '../features/renderCart.js';
 
 export const createManufacturerCart = (manufacturer) => {
-    const { selectedItems, cartData } = CartContext;
+    const { selectedItems } = CartContext;
 
     const template = document.getElementById('manufacturer-cart-template');
     const clone = template.content.cloneNode(true);
@@ -18,16 +17,6 @@ export const createManufacturerCart = (manufacturer) => {
     checkbox.id = manufacturer.manufacturer;
     checkbox.checked = allItemsSelected;
     nameSpan.textContent = manufacturer.manufacturer;
-
-    checkbox.addEventListener('change', (event) => {
-        const isChecked = event.target.checked;
-        cartData.forEach(product => {
-            if (product.manufacturer === event.target.id) {
-                isChecked ? selectedItems.add(product.id) : selectedItems.delete(product.id);
-            }
-        });
-        renderCart();
-    });
 
     for (const item of manufacturer.items) {
         const productNode = createCartItem({
