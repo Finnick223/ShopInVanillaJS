@@ -1,13 +1,14 @@
 import { CartContext } from '../context/CartContext.js';
 import { CalculateSum } from "../utils/CalculateSum.js";
 import { renderCart } from '../features/renderCart.js'
+import { createInput } from './shared/input.js';
 
 
 export const createCartItem = ({ item, manufacturer, manufacturerCheckbox }) => {
     const template = document.getElementById('cart-item-template');
     const product = template.content.cloneNode(true);
 
-    const checkbox = product.querySelector('.item-checkbox');
+    const checkbox = product.querySelector('.cart-item__checkbox');
     checkbox.checked = CartContext.selectedItems.has(item.id);
     checkbox.addEventListener('change', (event) => {
         event.target.checked ? CartContext.selectedItems.add(item.id) : CartContext.selectedItems.delete(item.id);
@@ -16,18 +17,25 @@ export const createCartItem = ({ item, manufacturer, manufacturerCheckbox }) => 
         CalculateSum();
     });
 
-    product.querySelector('.item-name').textContent = item.name;
-    product.querySelector('.item-manufacturer').textContent = item.manufacturer;
-    product.querySelector('.item-price').textContent = (item.price * item.quantity).toFixed(2) + ' $';
+    product.querySelector('.cart-item__name').textContent = item.name;
+    product.querySelector('.cart-item__manufacturer').textContent = item.manufacturer;
+    product.querySelector('.cart-item__price').textContent = (item.price * item.quantity).toFixed(2) + ' $';
 
-    const quantityInput = product.querySelector('.item-quantity');
-    quantityInput.value = item.quantity;
-    quantityInput.addEventListener('input', (event) => {
-        const inputQuantity = Number(event.target.value);
-        CartContext.actions.handleCartQuantityChange(item.id, inputQuantity);
+    const quantity = product.querySelector('.quantity');
+    const quantityInput = createInput({
+        id: product.id,
+        type: 'number',
+        value: product.quantity ?? 1,
+        min: 1,
+        max: 99,
+        inputMode: 'numeric',
+        onInput: (event) => {
+            if (Number(event.target.value) <= 99) product.quantity = Number(event.target.value);
+        }
     });
+    quantity.appendChild(quantityInput);
 
-    const buttonDelete = product.querySelector('.button-del');
+    const buttonDelete = product.querySelector('.button--delete');
     buttonDelete.addEventListener('click', () => CartContext.actions.deleteItemFromCart(item.id));
 
     return product;

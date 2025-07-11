@@ -29,7 +29,7 @@ export const createInput = ({ type, id, value, checked, min, max, inputMode, onI
         numberInputWrapper.appendChild(input);
 
         const buttonsWrapper = document.createElement('div');
-        buttonsWrapper.className = 'quantity-buttons';
+        buttonsWrapper.className = 'quantity__actions';
 
         const minusButton = document.createElement('button');
         minusButton.textContent = '-';

@@ -9,11 +9,11 @@ export const createManufacturerCart = (manufacturer) => {
     const template = document.getElementById('manufacturer-cart-template');
     const clone = template.content.cloneNode(true);
 
-    const wrapper = clone.querySelector('.cart-manufacturer-container');
-    const checkbox = wrapper.querySelector('.manufacturer-checkbox');
-    const nameSpan = wrapper.querySelector('.manufacturer-name');
-    const itemsContainer = wrapper.querySelector('.manufacturer-items');
-    const sumText = wrapper.querySelector('.manufacturer-sum-text');
+    const wrapper = clone.querySelector('.cart-manufacturer');
+    const checkbox = wrapper.querySelector('.cart-manufacturer__checkbox');
+    const nameSpan = wrapper.querySelector('.cart-manufacturer__name');
+    const itemsContainer = wrapper.querySelector('.cart-manufacturer__items');
+    const sumText = wrapper.querySelector('.cart-manufacturer__sum');
 
     const allItemsSelected = manufacturer.items.every(item => selectedItems.has(item.id));
     checkbox.id = manufacturer.manufacturer;
