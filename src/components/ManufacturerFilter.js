@@ -1,6 +1,6 @@
 import { CartContext } from "../context/CartContext.js";
 import { getElementsFromDOM } from "../utils/getElementsFromDOM.js";
-import { renderProducts } from "../features/renderProducts.js";
+import { renderProducts } from "./Products.js";
 
 export const createManufacturerFilter = () => {
     const { manufacturerSelect } = getElementsFromDOM();

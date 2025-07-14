@@ -1,12 +1,12 @@
 "use strict";
 import { CartContext } from './context/CartContext.js';
 import { getElementsFromDOM } from './utils/getElementsFromDOM.js';
-import { renderProducts } from './features/renderProducts.js';
-import { renderCart } from './features/Cart/renderCart.js';
+import { renderProducts } from './components/Products.js';
+import { renderCart } from './components/Cart.js';
 import { getCartFromLocalStorage } from './utils/handleLocalStorage.js';
 import { createManufacturerFilter } from './components/ManufacturerFilter.js';
 import { CartService } from './services/cartService.js';
-import { handleCartCheckboxChange } from './features/Cart/handleCartCheckboxChange.js'
+import { handleCartEvents } from './handlers/handleCartEvents.js';
 
 const init = () => {
     const { productList, cart, searchInput } = getElementsFromDOM();
@@ -15,7 +15,7 @@ const init = () => {
     CartContext.cartData = getCartFromLocalStorage();
     CartContext.actions = CartService;
 
-    cart.addEventListener('change', handleCartCheckboxChange);
+    cart.addEventListener('change', handleCartEvents);
     renderCart();
 
     searchInput.addEventListener("input", (event) => {

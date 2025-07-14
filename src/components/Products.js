@@ -1,5 +1,5 @@
 import { CartContext } from '../context/CartContext.js';
-import { createInput } from '../components/shared/input.js';
+import { createInput } from './shared/input.js';
 
 export const renderProducts = (productsToRender = CartContext.products) => {
     const { productList } = CartContext.elements;

@@ -1,6 +1,6 @@
 import { CartContext } from "../context/CartContext.js";
 import { updateLocalStorage } from "../utils/handleLocalStorage.js";
-import { renderCart } from "../features/Cart/renderCart.js";
+import { renderCart } from "../components/Cart.js";
 
 export const CartService = {
     addProductToCart(product) {
@@ -37,5 +37,17 @@ export const CartService = {
             updateLocalStorage(CartContext.cartData);
             renderCart();
         }
-    }
+    },
+
+    toggleManufacturerSelection(manufacturer, isSelected) {
+        CartContext.cartData.forEach(product => {
+            if (product.manufacturer === manufacturer) {
+                isSelected ? CartContext.selectedItems.add(id) : CartContext.selectedItems.delete(id);
+            }
+        });
+    },
+
+    toggleItemSelection(id, isSelected) {
+        isSelected ? CartContext.selectedItems.add(id) : CartContext.selectedItems.delete(id);
+    },
 };

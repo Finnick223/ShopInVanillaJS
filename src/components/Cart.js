@@ -1,8 +1,8 @@
-import { CartContext } from '../../context/CartContext.js';
-import { groupByManufacturer } from "../../utils/groupByManufacturer.js";
-import { createManufacturerCart } from "../../components/ManufacturerCart.js";
-import { calculateSum } from "../../utils/CalculateSum.js";
-import { createCartFooter } from "../../components/CartFooter.js"
+import { CartContext } from '../context/CartContext.js';
+import { groupByManufacturer } from "../utils/groupByManufacturer.js";
+import { calculateSum } from "../utils/CalculateSum.js";
+import { createManufacturerCart } from './ManufacturerCart.js';
+import { createCartFooter } from './CartFooter.js';
 
 export const renderCart = () => {
     const { cart } = CartContext.elements;
