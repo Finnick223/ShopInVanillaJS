@@ -7,17 +7,16 @@
 }
 
 body {
-    display: inline-flex;
+    display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
     height: 100vh;
-    width: 100%;
     padding: 1rem;
 }
 
 /* Layout Containers */
 .content {
-    display: inline-flex;
+    display: flex;
     gap: 10px;
 }
 
@@ -271,10 +270,9 @@ body {
 
 @media only screen and (max-width: 750px) {
     .content {
-        display: inline-flex;
+        display: flex;
         flex-direction: column;
         height: fit-content;
-        width: 100%;
     }
 
     .shop,
