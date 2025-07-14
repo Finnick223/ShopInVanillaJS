@@ -42,7 +42,7 @@ export const CartService = {
     toggleManufacturerSelection(manufacturer, isSelected) {
         CartContext.cartData.forEach(product => {
             if (product.manufacturer === manufacturer) {
-                isSelected ? CartContext.selectedItems.add(id) : CartContext.selectedItems.delete(id);
+                isSelected ? CartContext.selectedItems.add(product.id) : CartContext.selectedItems.delete(product.id);
             }
         });
     },
