@@ -36,11 +36,17 @@ const init = () => {
     });
 
     (async () => {
-        const response = await fetch('../products.json');
-        const data = await response.json();
-        CartContext.products.push(...data);
-        renderProducts();
-        createManufacturerFilter();
+        try {
+            const response = await fetch('../products.json');
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+            const data = await response.json();
+            CartContext.products.push(...data);
+            renderProducts();
+            createManufacturerFilter();
+        } catch (error) {
+            console.error('Failed to fetch products:', error);
+        }
     })();
 };
 

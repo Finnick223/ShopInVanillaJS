@@ -1,4 +1,5 @@
 import { CartContext } from "../context/CartContext.js";
+import { calculateSum } from "../utils/CalculateSum.js";
 
 export const openModal = () => {
     document.querySelector('.modal').classList.add('open');
@@ -14,7 +15,7 @@ export const closeModal = () => {
 }
 
 const clearModal = () => {
-    const modal = document.querySelector('#myModal');
+    const modal = document.querySelector('#buyModal');
     modal.replaceChildren();
 };
 
@@ -25,14 +26,13 @@ const renderCheckoutTemplate = (selectedProducts) => {
     const list = clone.querySelector('.checkout-list');
     const total = clone.querySelector('.checkout-total');
 
-    let totalAmount = 0;
     selectedProducts.forEach(product => {
         const li = document.createElement('li');
         li.textContent = `${product.name} - ${product.price} $ x ${product.quantity}`;
-        totalAmount += product.price * product.quantity;
         list.appendChild(li);
     });
 
+    const totalAmount = calculateSum();
     total.textContent = `Total: ${totalAmount.toFixed(2)} $`;
 
     return clone;
@@ -42,7 +42,7 @@ export const renderCheckoutModal = () => {
     const { cartData, selectedItems } = CartContext;
     const selectedProducts = cartData.filter(item => selectedItems.has(item.id));
 
-    const modal = document.querySelector('#myModal');
+    const modal = document.querySelector('#buyModal');
     clearModal();
 
     const checkoutContent = renderCheckoutTemplate(selectedProducts);
@@ -62,14 +62,9 @@ export const renderCheckoutModal = () => {
 
         clearModal();
 
-        const confirmationMessage = document.createElement('div');
-        confirmationMessage.classList.add('modal__body');
-        confirmationMessage.innerHTML = `
-            <h2>Purchase Confirmed</h2>
-            <p>Your payment method: <strong>${selectedPayment}</strong></p>
-            <p>Thank you for your purchase!</p>
-        `;
-
+        const confirmationTemplate = document.getElementById('confirmation-modal-template');
+        const confirmationMessage = confirmationTemplate.content.cloneNode(true);
+        confirmationMessage.querySelector('.payment-method strong').textContent = selectedPayment;
         modal.appendChild(confirmationMessage);
     });
 

@@ -1,8 +1,8 @@
 import { CartContext } from '../context/CartContext.js';
 import { groupByManufacturer } from "../utils/groupByManufacturer.js";
-import { calculateSum } from "../utils/CalculateSum.js";
 import { createManufacturerCart } from './ManufacturerCart.js';
 import { createCartFooter } from './CartFooter.js';
+import { updateCartTotal } from '../utils/updateSum.js';
 
 export const renderCart = () => {
     const { cart } = CartContext.elements;
@@ -17,5 +17,5 @@ export const renderCart = () => {
     }
 
     cart.appendChild(createCartFooter());
-    calculateSum();
+    updateCartTotal('#cart-total');
 };

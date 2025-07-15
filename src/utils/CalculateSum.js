@@ -8,6 +8,6 @@ export const calculateSum = () => {
             total += item.quantity * item.price;
         }
     }
-    const totalElement = document.querySelector('#cart-total');
-    totalElement.textContent = `Grand Total: ${total.toFixed(2)}$`;
+
+    return total;
 }
