@@ -7,6 +7,7 @@ import { getCartFromLocalStorage } from './utils/handleLocalStorage.js';
 import { createManufacturerFilter } from './components/ManufacturerFilter.js';
 import { CartService } from './services/cartService.js';
 import { handleCartEvents } from './handlers/handleCartEvents.js';
+import { closeModal } from './components/Modal.js';
 
 const init = () => {
     const { productList, cart, searchInput } = getElementsFromDOM();
@@ -24,6 +25,14 @@ const init = () => {
             product.name.toLowerCase().includes(searchTerm)
         );
         renderProducts(filteredProducts);
+    });
+
+    window.addEventListener('load', () => {
+        document.addEventListener('click', event => {
+            if (event.target.classList.contains('modal')) {
+                closeModal();
+            }
+        });
     });
 
     (async () => {

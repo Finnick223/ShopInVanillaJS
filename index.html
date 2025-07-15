@@ -31,6 +31,7 @@
             <div class="cart__content"></div>
         </section>
     </main>
+    <div class="modal" id="myModal"></div>
 </body>
 
 <template id="product-card-template">
@@ -83,6 +84,22 @@
     <div class="footer">
         <p id="cart-total" class="footer__total"></p>
         <button type="submit" class="footer__buy-button">BUY</button>
+    </div>
+</template>
+
+<template id="checkout-modal-template">
+    <div class="modal__body">
+        <h2>Checkout Summary</h2>
+        <ul class="checkout-list"></ul>
+        <p class="checkout-total"></p>
+        <hr class="modal__separator" />
+        <div class="modal__payment">
+            <h3>Select Payment Method:</h3>
+            <label><input type="radio" name="payment" value="card" checked> Credit/Debit Card</label><br>
+            <label><input type="radio" name="payment" value="cash"> Cash on Delivery</label>
+        </div>
+        <button class="modal__confirm">Confirm Purchase</button>
+        <button class="modal__close">Cancel</button>
     </div>
 </template>
 
