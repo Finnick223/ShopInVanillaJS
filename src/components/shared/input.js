@@ -22,7 +22,7 @@ export const createInput = ({ type, id, value, checked, min, max, inputMode, onI
         input.addEventListener('input', (event) => {
             input.value = input.value.replace(/[^\d]/g, '');
             let sanitazedDigits = parseInt(input.value.replace(/[^\d]/g, ''), 10);
-            sanitazedDigits <= 99 ? input.value = sanitazedDigits : input.value = 99;
+            isNaN(sanitazedDigits) ? input.value = 1 : input.value = Math.min(Math.max(sanitazedDigits, 1), 99);
             typeof onInput === 'function' && onInput(event);
         });
 

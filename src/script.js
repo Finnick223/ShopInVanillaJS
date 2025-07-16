@@ -7,6 +7,7 @@ import { getCartFromLocalStorage } from './utils/handleLocalStorage.js';
 import { createManufacturerFilter } from './components/ManufacturerFilter.js';
 import { CartService } from './services/cartService.js';
 import { handleCartEvents } from './handlers/handleCartEvents.js';
+import { closeModal } from './components/Modal.js';
 
 const init = () => {
     const { productList, cart, searchInput } = getElementsFromDOM();
@@ -26,12 +27,26 @@ const init = () => {
         renderProducts(filteredProducts);
     });
 
+    window.addEventListener('load', () => {
+        document.addEventListener('click', event => {
+            if (event.target.classList.contains('modal')) {
+                closeModal();
+            }
+        });
+    });
+
     (async () => {
-        const response = await fetch('../products.json');
-        const data = await response.json();
-        CartContext.products.push(...data);
-        renderProducts();
-        createManufacturerFilter();
+        try {
+            const response = await fetch('../products.json');
+            if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+
+            const data = await response.json();
+            CartContext.products.push(...data);
+            renderProducts();
+            createManufacturerFilter();
+        } catch (error) {
+            console.error('Failed to fetch products:', error);
+        }
     })();
 };
 

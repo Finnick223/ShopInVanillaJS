@@ -1,4 +1,4 @@
-import { CartContext } from "../context/CartContext.js";
+import { renderCheckoutModal } from "./Modal.js";
 
 export const createCartFooter = () => {
     const template = document.getElementById('cart-footer-template');
@@ -6,9 +6,7 @@ export const createCartFooter = () => {
     const buyButton = clone.querySelector('.footer__buy-button');
 
     buyButton.addEventListener('click', () => {
-        const { cartData, selectedItems } = CartContext;
-        const selectedProducts = cartData.filter(item => selectedItems.has(item.id));
-        console.log('Selected items:', selectedProducts);
+        renderCheckoutModal();
     });
 
     return clone;

@@ -99,12 +99,12 @@ body {
     justify-content: center;
 }
 
-.product__info h3 {
+.product__name {
     font-size: 1.1rem;
     margin-bottom: 4px;
 }
 
-.product__info p {
+.product__manufacturer {
     font-size: 0.9rem;
     color: #555;
     font-style: italic;
@@ -124,7 +124,7 @@ body {
     height: 60px;
 }
 
-.product__footer p {
+.product__price {
     display: flex;
     align-items: center;
     padding-left: 3%;
@@ -135,14 +135,15 @@ body {
     margin-left: auto;
 }
 
+.product__add-image {
+    height: 30px;
+    padding: 3px;
+}
+
 .product__actions .quantity button {
     padding: 0.45em;
 }
 
-.product__add-button img {
-    height: 30px;
-    padding: 3px;
-}
 
 /* Cart */
 .cart__content {
@@ -197,7 +198,7 @@ body {
     z-index: 10;
 }
 
-.footer button {
+.footer__buy-button {
     cursor: pointer;
 }
 
@@ -266,6 +267,89 @@ body {
     font-size: large;
     background-color: rgba(252, 251, 250, 0.5);
 }
+
+/* MODAL STYLES */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 40px;
+    overflow: auto;
+    z-index: 10000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal.open {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.modal__body {
+    background: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+    max-width: 500px;
+    box-sizing: border-box;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.checkout-list {
+    list-style: none;
+    margin: 10px 0;
+}
+
+.modal__separator {
+    margin: 20px 0;
+    border-top: 1px solid #ccc;
+}
+
+.modal__payment {
+    margin-bottom: 20px;
+}
+
+.modal__header {
+    margin-bottom: 10px;
+}
+
+.modal__confirm,
+.modal__close {
+    margin-right: 10px;
+    padding: 10px 15px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    border: none;
+    min-width: 110px;
+    transition: background-color 0.2s ease;
+}
+
+.modal__confirm {
+    background-color: #28a745;
+    color: white;
+}
+
+.modal__confirm:hover {
+    background-color: #218838;
+}
+
+.modal__close {
+    background-color: #ccc;
+    color: #333;
+    margin: 5px;
+}
+
+.modal__close:hover {
+    background-color: #b3b3b3;
+}
+
 
 
 @media only screen and (max-width: 750px) {

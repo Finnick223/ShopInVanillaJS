@@ -42,13 +42,6 @@
         "price": 12.99
     },
     {
-        "id": "7",
-        "name": "Gaming Monitor",
-        "manufacturer": "ASUS",
-        "quantity": 1,
-        "price": 279.00
-    },
-    {
         "id": "8",
         "name": "External SSD 1TB",
         "manufacturer": "Samsung",
